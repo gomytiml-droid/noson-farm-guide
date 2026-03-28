@@ -1,0 +1,112 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>農場メモ</title>
+<style>
+* { box-sizing: border-box; margin: 0; padding: 0; }
+body {
+  font-family: -apple-system, 'Hiragino Sans', sans-serif;
+  background: #1a3d16;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  padding: 24px;
+}
+.card {
+  background: #fff;
+  border-radius: 20px;
+  padding: 32px 24px;
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.25);
+}
+.icon { font-size: 3rem; margin-bottom: 12px; }
+h1 { font-size: 1.3rem; color: #2d5a27; font-weight: 700; margin-bottom: 6px; }
+.sub { font-size: .85rem; color: #888; margin-bottom: 28px; }
+
+.btn {
+  display: block;
+  width: 100%;
+  padding: 16px;
+  border-radius: 14px;
+  font-size: 1rem;
+  font-weight: 700;
+  cursor: pointer;
+  border: none;
+  margin-bottom: 14px;
+  text-decoration: none;
+  transition: opacity .15s;
+}
+.btn:active { opacity: .75; }
+.btn-primary {
+  background: #2d5a27;
+  color: #fff;
+}
+.btn-secondary {
+  background: #f0f7f0;
+  color: #2d5a27;
+  border: 2px solid #c8e6c8;
+}
+
+.tip {
+  margin-top: 20px;
+  font-size: .75rem;
+  color: #aaa;
+  line-height: 1.6;
+}
+</style>
+</head>
+<body>
+<div class="card">
+  <div class="icon">🌱</div>
+  <h1>農場メモ</h1>
+  <p class="sub">観察・気づきをすぐに記録</p>
+
+  <a class="btn btn-primary" id="btn-gmail" href="#">
+    📧 Gmailで記録する
+  </a>
+
+  <a class="btn btn-secondary" href="https://gomytiml-droid.github.io/noson-farm-guide/" target="_blank">
+    📖 知識ベースを開く
+  </a>
+
+  <p class="tip">
+    このページをホーム画面に追加すると<br>
+    アプリのように使います
+  </p>
+</div>
+
+<script>
+// 今日の日付を自動で入れたテンプレートを生成
+function buildGmailUrl() {
+  const now = new Date();
+  const date = `${now.getFullYear()}/${now.getMonth()+1}/${now.getDate()}`;
+  const time = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
+
+  const subject = encodeURIComponent('[農場メモ] ' + date);
+  const body = encodeURIComponent(
+    `日時：${date} ${time}\n` +
+    `品種：（かいわれ・ブロッコリー・豆苗）\n\n` +
+    `観察内容：\n\n` +
+    `EC/pH：\n` +
+    `温度：\n\n` +
+    `特記事項・改善案：\n`
+  );
+
+  return `https://mail.google.com/mail/?view=cm&to=gomytiml%40gmail.com&su=${subject}&body=${body}`;
+}
+
+document.getElementById('btn-gmail').href = buildGmailUrl();
+
+// ページ読み込み時に毎回URLを更新（日付を常に今日に）
+window.addEventListener('focus', function() {
+  document.getElementById('btn-gmail').href = buildGmailUrl();
+});
+</script>
+</body>
+</html>

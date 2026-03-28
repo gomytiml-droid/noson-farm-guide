@@ -91,19 +91,14 @@ function buildGmailUrl() {
   const hm   = `${String(now.getHours()).padStart(2,'0')}:${String(now.getMinutes()).padStart(2,'0')}`;
   const sub  = encodeURIComponent(`[農場メモ] ${ymd}`);
   const body = encodeURIComponent(
-    `日時：${ymd} ${hm}\n` +
-    `品種：（かいわれ・ブロッコリー・豆苗）\n\n` +
-    `観察内容：\n\n` +
-    `EC/pH：\n` +
-    `温度：\n\n` +
-    `特記事項・改善案：\n`
+    `${ymd} ${hm}\n\n`
   );
   return `https://mail.google.com/mail/?view=cm&to=gomytiml%40gmail.com&su=${sub}&body=${body}`;
 }
 
 const url = buildGmailUrl();
 
-// 自動リダイレクト（0.4答後）
+// 自動リダイレクト（0.4秒後）
 setTimeout(() => {
   window.location.href = url;
 }, 400);

@@ -3,1001 +3,1424 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Nosan Sprout Farm / ノーサン スプラウト農場</title>
+<title>ノーサン 農場ガイド</title>
 <style>
-*{box-sizing:border-box;margin:0;padding:0}
-body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Yu Gothic',sans-serif;background:#f4f7f4;color:#333;font-size:15px}
-
-.header{background:#2d5a27;color:white;padding:14px 16px 10px;position:sticky;top:0;z-index:200;box-shadow:0 2px 8px rgba(0,0,0,.25)}
-.header-top{display:flex;justify-content:space-between;align-items:center}
-.header h1{font-size:1.05rem;font-weight:700}
-.header p{font-size:.72rem;opacity:.75;margin-top:2px}
-.lang-toggle{display:flex;background:rgba(255,255,255,.15);border-radius:20px;padding:2px;gap:2px;flex-shrink:0}
-.lang-btn{padding:4px 11px;border-radius:18px;font-size:.75rem;font-weight:700;cursor:pointer;color:rgba(255,255,255,.7);border:none;background:transparent;transition:.15s}
-.lang-btn.active{background:#fff;color:#2d5a27}
-
-.nav-wrap{background:#1a3d16;position:sticky;top:58px;z-index:190;overflow-x:auto;display:flex;scrollbar-width:none}
-.nav-wrap::-webkit-scrollbar{display:none}
-.nav-tab{flex-shrink:0;padding:9px 14px;color:rgba(255,255,255,.65);font-size:.76rem;cursor:pointer;white-space:nowrap;border-bottom:3px solid transparent;transition:all .2s}
-.nav-tab.active{color:#fff;border-bottom-color:#7bc97b;background:rgba(255,255,255,.06)}
-
-.content{padding:14px;max-width:620px;margin:0 auto}
-.section{display:none}.section.active{display:block}
-
-.card{background:#fff;border-radius:12px;padding:15px;margin-bottom:12px;box-shadow:0 1px 5px rgba(0,0,0,.07)}
-.card-title{font-size:.92rem;font-weight:700;margin-bottom:10px;color:#2d5a27;display:flex;align-items:center;gap:7px}
-
-.badge{display:inline-block;padding:2px 9px;border-radius:20px;font-size:.68rem;font-weight:700;margin-right:4px}
-.b-red{background:#fee2e2;color:#dc2626}.b-orange{background:#fef3c7;color:#c05621}
-.b-green{background:#dcfce7;color:#15803d}.b-blue{background:#dbeafe;color:#1d4ed8}
-
-table{width:100%;border-collapse:collapse;font-size:.8rem;margin:8px 0}
-th{background:#f0f7f0;padding:7px 8px;text-align:left;font-weight:700;color:#2d5a27;border-bottom:2px solid #c8e6c8}
-td{padding:7px 8px;border-bottom:1px solid #f0f0f0;vertical-align:top;line-height:1.45}
-tr:last-child td{border-bottom:none}
-
-.info{background:#f0f7f0;border-left:3px solid #2d5a27;padding:9px 12px;border-radius:0 8px 8px 0;margin:8px 0;font-size:.8rem;line-height:1.6}
-.warn{background:#fff7ed;border-left:3px solid #ea580c;padding:9px 12px;border-radius:0 8px 8px 0;margin:8px 0;font-size:.8rem;line-height:1.6}
-.danger{background:#fef2f2;border-left:3px solid #dc2626;padding:9px 12px;border-radius:0 8px 8px 0;margin:8px 0;font-size:.8rem;line-height:1.6}
-
-.pri-item{display:flex;gap:11px;align-items:flex-start;padding:11px 0;border-bottom:1px solid #f0f0f0}
-.pri-item:last-child{border-bottom:none}
-.pri-num{width:28px;height:28px;background:#2d5a27;color:#fff;border-radius:50%;display:flex;align-items:center;justify-content:center;font-weight:700;font-size:.9rem;flex-shrink:0;margin-top:1px}
-.pri-body strong{display:block;font-size:.88rem;margin-bottom:3px}
-.pri-body span{font-size:.78rem;color:#666;line-height:1.5}
-
-.task-item{padding:11px 0;border-bottom:1px solid #f0f0f0}.task-item:last-child{border-bottom:none}
-.task-head{display:flex;align-items:center;gap:7px;margin-bottom:4px}
-.task-title{font-size:.87rem;font-weight:600}
-.task-detail{font-size:.78rem;color:#555;line-height:1.5;margin-bottom:4px}
-.task-prereq{font-size:.75rem;color:#c05621;background:#fff7ed;padding:4px 8px;border-radius:6px;display:inline-block}
-.task-action{font-size:.75rem;color:#15803d;background:#f0fdf4;padding:4px 8px;border-radius:6px;margin-top:4px;display:inline-block}
-
-.season-sel{display:flex;gap:6px;margin-bottom:12px;flex-wrap:wrap}
-.s-btn{padding:6px 15px;border-radius:20px;border:1.5px solid #2d5a27;background:#fff;color:#2d5a27;font-size:.78rem;cursor:pointer;font-weight:600;transition:.15s}
-.s-btn.active{background:#2d5a27;color:#fff}
-.recipe-block{display:none}.recipe-block.active{display:block}
-.recipe-row{display:flex;justify-content:space-between;align-items:center;padding:9px 0;border-bottom:1px solid #f0f0f0}
-.recipe-row:last-child{border-bottom:none}
-.recipe-label{font-size:.82rem;color:#555}
-.recipe-val{font-size:1.1rem;font-weight:700;color:#2d5a27}
-
-.timeline{position:relative;padding-left:22px;margin:8px 0}
-.timeline::before{content:'';position:absolute;left:7px;top:5px;bottom:5px;width:2px;background:#c8e6c8}
-.tl-item{position:relative;margin-bottom:10px}
-.tl-item::before{content:'';position:absolute;left:-18px;top:5px;width:10px;height:10px;border-radius:50%;background:#2d5a27;border:2px solid #fff;box-shadow:0 0 0 2px #2d5a27}
-.tl-day{font-size:.73rem;font-weight:700;color:#2d5a27;margin-bottom:1px}
-.tl-text{font-size:.81rem;color:#444;line-height:1.45}
-
-.variety-nav{display:flex;gap:6px;margin-bottom:12px}
-.v-btn{flex:1;padding:8px 6px;border-radius:8px;border:1.5px solid #ddd;background:#fff;font-size:.8rem;cursor:pointer;text-align:center;font-weight:600;color:#666;transition:.15s}
-.v-btn.active{border-color:#2d5a27;background:#f0f7f0;color:#2d5a27}
-.variety-block{display:none}.variety-block.active{display:block}
-
-.symptom-item{padding:10px 0;border-bottom:1px solid #f0f0f0;cursor:pointer}
-.symptom-item:last-child{border-bottom:none}
-.symptom-q{display:flex;justify-content:space-between;align-items:center;font-size:.86rem;font-weight:600;color:#c05621}
-.symptom-q::after{content:'▶';font-size:.7rem;color:#bbb}
-.symptom-item.open .symptom-q::after{content:'▼';color:#2d5a27}
-.symptom-ans{display:none;margin-top:7px;font-size:.8rem;color:#444;line-height:1.6;padding-left:8px}
-.symptom-item.open .symptom-ans{display:block}
-.symptom-action{background:#dcfce7;border:1px solid #86efac;border-radius:6px;padding:6px 10px;margin-top:6px;font-size:.78rem;color:#15803d;font-weight:600}
-
-/* Japanese vocab tooltip system */
-.jword{
-  border-bottom:2px solid #2d5a27;
-  cursor:pointer;
-  position:relative;
-  display:inline;
-  padding-bottom:1px;
-  color:#1a3d16;
-  font-weight:600;
-}
-.jword:hover{background:#f0f7f0;border-radius:3px}
-.jtooltip{
-  display:none;
-  position:fixed;
-  background:#1a3d16;
-  color:#fff;
-  padding:8px 12px;
-  border-radius:10px;
-  font-size:.82rem;
-  z-index:999;
-  max-width:220px;
-  box-shadow:0 4px 16px rgba(0,0,0,.25);
-  pointer-events:none;
-  line-height:1.5;
-}
-.jtooltip.visible{display:block}
-.jtooltip-kana{font-size:.72rem;opacity:.75;display:block}
-.jtooltip-meaning{font-size:.78rem;margin-top:3px;border-top:1px solid rgba(255,255,255,.2);padding-top:3px;opacity:.85}
-
-.chat-window{background:#f5f5f5;border-radius:12px;padding:12px;margin-bottom:12px;max-height:420px;overflow-y:auto}
-.chat-q{text-align:right;margin-bottom:10px}
-.chat-q .bubble{display:inline-block;background:#2d5a27;color:#fff;padding:9px 13px;border-radius:18px 18px 4px 18px;font-size:.82rem;max-width:80%;line-height:1.5}
-.chat-a{text-align:left;margin-bottom:16px}
-.chat-a .bubble{display:inline-block;background:#fff;padding:9px 13px;border-radius:18px 18px 18px 4px;font-size:.82rem;max-width:92%;line-height:1.6;box-shadow:0 1px 3px rgba(0,0,0,.08)}
-.faq-btns{display:flex;flex-wrap:wrap;gap:6px;margin-bottom:10px}
-.faq-btn{padding:7px 12px;background:#fff;border:1.5px solid #c8e6c8;border-radius:20px;font-size:.77rem;cursor:pointer;color:#2d5a27;font-weight:600}
-.claude-btn{display:flex;align-items:center;justify-content:center;gap:8px;background:#5a35d0;color:#fff;padding:13px;border-radius:12px;font-weight:700;font-size:.88rem;cursor:pointer;margin-top:4px;border:none;width:100%}
-.copy-done{display:none;color:#15803d;font-size:.78rem;text-align:center;margin-top:6px}
-
-p{font-size:.82rem;line-height:1.65;margin-bottom:8px;color:#444}
-h3{font-size:.86rem;font-weight:700;color:#2d5a27;margin:13px 0 6px}
-h4{font-size:.82rem;font-weight:700;color:#555;margin:10px 0 5px}
-
-/* Hide/show by language */
-body.lang-en .jp-only{display:none!important}
-body.lang-jp .en-only{display:none!important}
+  :root {
+    --green-deep:#1a3d2b;--green-mid:#2d6a45;--green-light:#4a9463;--green-pale:#e8f2eb;
+    --amber:#d4820a;--amber-pale:#fef4e3;--red:#c0392b;--red-pale:#fdecea;
+    --blue:#2563a8;--blue-pale:#e8f0fb;--gray:#6b7280;--gray-pale:#f3f4f6;
+    --cream:#faf8f4;--white:#ffffff;--text:#1a1a1a;--text-muted:#555;
+    --border:#e0dbd0;--shadow:0 2px 8px rgba(0,0,0,0.08);--radius:12px;
+  }
+  *{box-sizing:border-box;margin:0;padding:0}
+  body{font-family:-apple-system,BlinkMacSystemFont,'Hiragino Sans','Noto Sans JP',sans-serif;background:var(--cream);color:var(--text);font-size:15px;line-height:1.65;padding-bottom:40px}
+  .site-header{background:var(--green-deep);color:white;padding:18px 20px 14px;position:sticky;top:0;z-index:100}
+  .header-inner{max-width:760px;margin:0 auto;display:flex;align-items:center;justify-content:space-between}
+  .farm-name{font-size:18px;font-weight:700;letter-spacing:.04em}
+  .farm-sub{font-size:11px;opacity:.7;margin-top:1px}
+  .lang-toggle{display:flex;gap:6px}
+  .lang-btn{background:rgba(255,255,255,.15);border:1px solid rgba(255,255,255,.3);color:white;padding:4px 12px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;transition:all .2s}
+  .lang-btn.active{background:white;color:var(--green-deep)}
+  .tab-nav{background:var(--white);border-bottom:2px solid var(--border);position:sticky;top:62px;z-index:90;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none}
+  .tab-nav::-webkit-scrollbar{display:none}
+  .tab-nav-inner{display:flex;max-width:760px;margin:0 auto;min-width:max-content}
+  .tab-btn{padding:14px 16px 12px;border:none;background:none;cursor:pointer;font-size:13px;font-weight:600;color:var(--gray);white-space:nowrap;border-bottom:3px solid transparent;margin-bottom:-2px;transition:all .2s;display:flex;align-items:center;gap:5px}
+  .tab-btn:hover{color:var(--green-mid)}
+  .tab-btn.active{color:var(--green-deep);border-bottom-color:var(--green-deep)}
+  .tab-section{display:none}
+  .tab-section.active{display:block}
+  .content-wrap{max-width:760px;margin:0 auto;padding:24px 16px}
+  .card{background:var(--white);border-radius:var(--radius);padding:20px;margin-bottom:16px;box-shadow:var(--shadow);border:1px solid var(--border)}
+  .card-title{font-size:15px;font-weight:700;color:var(--green-deep);margin-bottom:14px;padding-bottom:10px;border-bottom:1px solid var(--green-pale);display:flex;align-items:center;gap:8px}
+  .section-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin-bottom:12px;margin-top:24px}
+  .section-label:first-child{margin-top:0}
+  .badge{display:inline-flex;align-items:center;padding:3px 10px;border-radius:20px;font-size:11px;font-weight:700;white-space:nowrap}
+  .badge-red{background:var(--red-pale);color:var(--red)}
+  .badge-amber{background:var(--amber-pale);color:var(--amber)}
+  .badge-green{background:var(--green-pale);color:var(--green-mid)}
+  .badge-gray{background:var(--gray-pale);color:var(--gray)}
+  .badge-blue{background:var(--blue-pale);color:var(--blue)}
+  .issue-item{padding:14px 0;border-bottom:1px solid var(--border);display:flex;flex-direction:column;gap:8px}
+  .issue-item:last-child{border-bottom:none;padding-bottom:0}
+  .issue-head{display:flex;align-items:flex-start;gap:10px;flex-wrap:wrap}
+  .issue-title{font-weight:700;font-size:14px;flex:1;min-width:0}
+  .issue-body{font-size:13px;color:var(--text-muted);line-height:1.6}
+  .issue-action{font-size:12px;font-weight:600;color:var(--green-mid);background:var(--green-pale);padding:4px 10px;border-radius:6px;width:fit-content}
+  .change-item{display:flex;gap:14px;padding:12px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+  .change-item:last-child{border-bottom:none}
+  .change-date{font-size:11px;font-weight:700;color:var(--gray);white-space:nowrap;min-width:60px;padding-top:2px}
+  .change-content{flex:1}
+  .change-title{font-weight:700;font-size:14px;margin-bottom:4px}
+  .change-detail{font-size:13px;color:var(--text-muted)}
+  .change-result{font-size:12px;color:var(--amber);font-weight:600;margin-top:4px;padding:3px 8px;background:var(--amber-pale);border-radius:4px;width:fit-content}
+  .focus-card{background:var(--green-deep);color:white;border-radius:var(--radius);padding:20px;margin-bottom:16px}
+  .focus-label{font-size:11px;font-weight:700;letter-spacing:.08em;opacity:.7;margin-bottom:8px;text-transform:uppercase}
+  .focus-text{font-size:15px;font-weight:600;line-height:1.6}
+  .focus-items{margin-top:12px;display:flex;flex-direction:column;gap:8px}
+  .focus-item{display:flex;align-items:flex-start;gap:8px;font-size:13px;opacity:.9}
+  .focus-dot{width:6px;height:6px;background:rgba(255,255,255,.6);border-radius:50%;margin-top:6px;flex-shrink:0}
+  .month-hero{background:var(--green-deep);border-radius:var(--radius);padding:24px 20px;margin-bottom:16px;color:white}
+  .month-hero-label{font-size:11px;font-weight:700;letter-spacing:.1em;text-transform:uppercase;opacity:.7;margin-bottom:6px}
+  .month-hero-title{font-size:32px;font-weight:800;letter-spacing:-.01em;margin-bottom:4px}
+  .month-hero-season{font-size:13px;opacity:.8;margin-bottom:18px}
+  .month-task-list{display:flex;flex-direction:column;gap:10px}
+  .month-task{background:rgba(255,255,255,.12);border-radius:8px;padding:12px 14px;display:flex;align-items:flex-start;gap:10px}
+  .month-task-prio{font-size:11px;font-weight:700;padding:2px 8px;border-radius:10px;white-space:nowrap;flex-shrink:0}
+  .prio-now{background:rgba(192,57,43,.7);color:white}
+  .prio-plan{background:rgba(212,130,10,.7);color:white}
+  .prio-prep{background:rgba(74,148,99,.6);color:white}
+  .month-task-text{font-size:13px;line-height:1.5}
+  .year-divider{text-align:center;margin:28px 0 20px;position:relative}
+  .year-divider::before{content:'';position:absolute;top:50%;left:0;right:0;height:1px;background:var(--border)}
+  .year-divider-label{background:var(--cream);color:var(--gray);font-size:12px;font-weight:700;letter-spacing:.08em;padding:0 14px;position:relative;text-transform:uppercase}
+  .year-grid{display:grid;grid-template-columns:1fr 1fr;gap:10px}
+  @media(min-width:600px){.year-grid{grid-template-columns:1fr 1fr 1fr}}
+  .month-card{background:var(--white);border-radius:10px;padding:14px;border:1px solid var(--border);box-shadow:var(--shadow)}
+  .month-card.current{border-color:var(--green-mid);border-width:2px}
+  .month-card.summer{border-left:3px solid var(--amber)}
+  .month-card.winter{border-left:3px solid var(--blue)}
+  .month-card-head{display:flex;align-items:center;justify-content:space-between;margin-bottom:10px}
+  .month-num{font-size:22px;font-weight:800;color:var(--green-deep);line-height:1}
+  .month-card.current .month-num{color:var(--green-mid)}
+  .month-name-small{font-size:11px;font-weight:600;color:var(--gray)}
+  .month-season-badge{font-size:10px;padding:2px 7px;border-radius:8px;font-weight:600}
+  .season-spring{background:#e8f5e9;color:#2d7a3a}
+  .season-summer{background:var(--amber-pale);color:var(--amber)}
+  .season-fall{background:#fff3e0;color:#bf6e00}
+  .season-winter{background:var(--blue-pale);color:var(--blue)}
+  .current-marker{font-size:10px;background:var(--green-mid);color:white;padding:2px 7px;border-radius:8px;font-weight:700}
+  .month-tasks-small{list-style:none;display:flex;flex-direction:column;gap:4px}
+  .month-tasks-small li{font-size:12px;color:var(--text-muted);display:flex;gap:6px;align-items:flex-start}
+  .month-tasks-small li::before{content:'·';color:var(--green-light);font-weight:700;font-size:14px;line-height:1.2;flex-shrink:0}
+  .priority-item{display:flex;gap:16px;padding:14px 0;border-bottom:1px solid var(--border);align-items:flex-start}
+  .priority-item:last-child{border-bottom:none}
+  .priority-num{width:36px;height:36px;background:var(--green-deep);color:white;border-radius:50%;display:flex;align-items:center;justify-content:center;font-size:16px;font-weight:800;flex-shrink:0}
+  .priority-body{flex:1}
+  .priority-title{font-weight:700;font-size:15px;margin-bottom:5px}
+  .priority-desc{font-size:13px;color:var(--text-muted);line-height:1.6}
+  .vision-placeholder{background:repeating-linear-gradient(-45deg,var(--gray-pale),var(--gray-pale) 4px,var(--white) 4px,var(--white) 14px);border:1px dashed var(--border);border-radius:var(--radius);padding:24px 20px;text-align:center;color:var(--gray);margin-bottom:16px}
+  .vision-placeholder-icon{font-size:28px;margin-bottom:8px}
+  .vision-placeholder-text{font-size:13px;line-height:1.6}
+  .rule-card{background:var(--white);border-radius:var(--radius);padding:18px 20px;margin-bottom:12px;box-shadow:var(--shadow);border:1px solid var(--border);border-left-width:4px}
+  .rule-card.confirmed{border-left-color:var(--green-mid)}
+  .rule-card.trial{border-left-color:var(--amber)}
+  .rule-card.reviewing{border-left-color:var(--gray)}
+  .rule-head{display:flex;align-items:flex-start;gap:10px;margin-bottom:10px;flex-wrap:wrap}
+  .rule-id{font-size:11px;font-weight:700;color:var(--gray);background:var(--gray-pale);padding:2px 8px;border-radius:6px;flex-shrink:0}
+  .rule-title{font-weight:700;font-size:14px;flex:1}
+  .rule-why{font-size:13px;color:var(--text-muted);margin-bottom:8px;line-height:1.6}
+  .rule-action{font-size:12px;color:var(--green-mid);font-weight:600;background:var(--green-pale);padding:4px 10px;border-radius:6px;width:fit-content}
+  .rule-divider-label{font-size:11px;font-weight:700;text-transform:uppercase;letter-spacing:.08em;color:var(--gray);margin:20px 0 10px;display:flex;align-items:center;gap:8px}
+  .rule-divider-label::after{content:'';flex:1;height:1px;background:var(--border)}
+  .shelf-nav{display:flex;gap:8px;overflow-x:auto;-webkit-overflow-scrolling:touch;scrollbar-width:none;padding-bottom:4px;margin-bottom:16px}
+  .shelf-nav::-webkit-scrollbar{display:none}
+  .shelf-btn{background:var(--white);border:1.5px solid var(--border);padding:8px 14px;border-radius:20px;cursor:pointer;font-size:12px;font-weight:600;color:var(--gray);white-space:nowrap;transition:all .2s;display:flex;align-items:center;gap:5px}
+  .shelf-btn.active{background:var(--green-deep);border-color:var(--green-deep);color:white}
+  .shelf-section{display:none}
+  .shelf-section.active{display:block}
+  .book-card{background:var(--white);border-radius:var(--radius);padding:16px 18px;margin-bottom:12px;box-shadow:var(--shadow);border:1px solid var(--border);display:flex;gap:14px;align-items:flex-start}
+  .book-icon{font-size:28px;flex-shrink:0;width:48px;height:48px;background:var(--green-pale);border-radius:8px;display:flex;align-items:center;justify-content:center}
+  .book-body{flex:1}
+  .book-title{font-weight:700;font-size:14px;margin-bottom:4px}
+  .book-desc{font-size:12px;color:var(--text-muted);line-height:1.5}
+  .book-tag{display:inline-block;font-size:10px;font-weight:600;padding:2px 7px;border-radius:6px;background:var(--green-pale);color:var(--green-mid);margin-top:6px}
+  .shelf-empty{border:1.5px dashed var(--border);border-radius:var(--radius);padding:32px 20px;text-align:center;color:var(--gray)}
+  .shelf-empty-icon{font-size:32px;margin-bottom:10px}
+  .shelf-empty-text{font-size:13px;line-height:1.6}
+  .warn-box{background:var(--amber-pale);border-left:3px solid var(--amber);border-radius:0 8px 8px 0;padding:12px 14px;font-size:13px;color:#7a4a00;margin-top:10px;line-height:1.6}
+  .info-box{background:var(--blue-pale);border-left:3px solid var(--blue);border-radius:0 8px 8px 0;padding:12px 14px;font-size:13px;color:#1a3d6b;margin-top:10px;line-height:1.6}
+  .data-table{width:100%;border-collapse:collapse;font-size:13px;margin-top:10px}
+  .data-table th{background:var(--green-pale);color:var(--green-deep);font-weight:700;padding:8px 10px;text-align:left;font-size:12px}
+  .data-table td{padding:8px 10px;border-bottom:1px solid var(--border);color:var(--text-muted)}
+  .data-table tr:last-child td{border-bottom:none}
+  [lang="en"] .jp-only{display:none}
+  [lang="ja"] .en-only{display:none}
+  @media(max-width:480px){.tab-btn{padding:12px 12px 10px;font-size:12px}.month-hero-title{font-size:26px}.year-grid{grid-template-columns:1fr 1fr}.content-wrap{padding:16px 12px}}
 </style>
 </head>
-<body class="lang-jp">
+<body lang="ja">
 
-<div id="jtooltip" class="jtooltip"></div>
-
-<div class="header">
-  <div class="header-top">
+<header class="site-header">
+  <div class="header-inner">
     <div>
-      <h1>🌱 <span class="jp-only">ノーサン スプラウト農場</span><span class="en-only">Nosan Sprout Farm</span></h1>
-      <p class="jp-only">現場知識ベース ／ 富山県射水市</p>
-      <p class="en-only">Field Knowledge Base ／ Imizu, Toyama</p>
+      <div class="farm-name jp-only" id="hd-name-jp"></div>
+      <div class="farm-name en-only" id="hd-name-en"></div>
+      <div class="farm-sub jp-only" id="hd-sub-jp"></div>
+      <div class="farm-sub en-only" id="hd-sub-en"></div>
     </div>
     <div class="lang-toggle">
-      <button class="lang-btn active" id="btn-jp" onclick="setLang('jp')">JP</button>
-      <button class="lang-btn" id="btn-en" onclick="setLang('en')">EN</button>
+      <button class="lang-btn active" onclick="setLang('ja')">JP</button>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
     </div>
   </div>
-</div>
+</header>
 
-<div class="nav-wrap">
-  <div class="nav-tab active" onclick="showTab('dashboard')">
-    <span class="jp-only">📋 ダッシュボード</span><span class="en-only">📋 Dashboard</span>
-  </div>
-  <div class="nav-tab" onclick="showTab('philosophy')">
-    <span class="jp-only">🧭 経営方針</span><span class="en-only">🧭 Philosophy</span>
-  </div>
-  <div class="nav-tab" onclick="showTab('process')">
-    <span class="jp-only">⏱ 工程フロー</span><span class="en-only">⏱ Process</span>
-  </div>
-  <div class="nav-tab" onclick="showTab('variety')">
-    <span class="jp-only">🌿 品種管理</span><span class="en-only">🌿 Varieties</span>
-  </div>
-  <div class="nav-tab" onclick="showTab('fertilizer')">
-    <span class="jp-only">⚗️ 肥料・養液</span><span class="en-only">⚗️ Fertilizer</span>
-  </div>
-  <div class="nav-tab" onclick="showTab('symptoms')">
-    <span class="jp-only">🔍 症状チェック</span><span class="en-only">🔍 Symptoms</span>
-  </div>
-  <div class="nav-tab" onclick="showTab('chat')">
-    <span class="jp-only">💬 Q&amp;A</span><span class="en-only">💬 Q&amp;A</span>
-  </div>
-</div>
+<nav class="tab-nav">
+  <div class="tab-nav-inner" id="tab-nav-inner"></div>
+</nav>
 
-<!-- ===== DASHBOARD ===== -->
-<div class="section active content" id="tab-dashboard">
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">🔴 今すぐ対応が必要なこと</span>
-      <span class="en-only">🔴 Urgent — Act Now</span>
-    </div>
+<div id="tab1" class="tab-section active"><div class="content-wrap" id="content-tab1"></div></div>
+<div id="tab2" class="tab-section"><div class="content-wrap" id="content-tab2"></div></div>
+<div id="tab3" class="tab-section"><div class="content-wrap" id="content-tab3"></div></div>
+<div id="tab4" class="tab-section"><div class="content-wrap" id="content-tab4"></div></div>
+<div id="tab5" class="tab-section"><div class="content-wrap" id="content-tab5"></div></div>
+<div id="tab6" class="tab-section"><div class="content-wrap" id="content-tab6"></div></div>
 
-    <div class="task-item">
-      <div class="task-head"><span class="badge b-red"><span class="jp-only">最緊急</span><span class="en-only">Critical</span></span>
-        <span class="task-title jp-only">肥料の混ぜ方を変える</span>
-        <span class="task-title en-only">Change fertilizer mixing method</span>
+<!-- ===================== DATA (updated by push script) ===================== -->
+<script id="farm-data" type="application/json">
+{
+  "meta": {
+    "updated": "2026-04-02",
+    "farm_jp": "ノーサン 農場ガイド",
+    "farm_en": "NOSON Farm Guide",
+    "sub_jp": "富山県射水市 スプラウト専門農場",
+    "sub_en": "Sprout Farm · Imizu City, Toyama"
+  },
+  "tab1": {
+    "focus": {
+      "period_jp": "2026年4月",
+      "period_en": "April 2026",
+      "summary_jp": "肥料の過剰投与を正しく把握し直すこと。そして夏が来る前に冷却問題に手をつけること。",
+      "summary_en": "Recalibrating our fertilizer dosage accurately — and getting ahead of the summer cooling problem before it hits.",
+      "items": [
+        {
+          "jp": "新しいECセンサーが届き次第、養液処方を全面的に見直す",
+          "en": "When the new EC sensor arrives, fully revise our nutrient recipe"
+        },
+        {
+          "jp": "ミスト冷却システムの設計を1レーン分だけテスト導入まで進める",
+          "en": "Move mist cooling design forward to a 1-lane test installation"
+        },
+        {
+          "jp": "豆苗の根腐れが現在落ち着いている間に、記録の仕組みを作る",
+          "en": "Build a logging system for pea shoots while root rot is currently quiet"
+        }
+      ]
+    },
+    "recent_changes": [
+      {
+        "date": "2026.04.02",
+        "title_jp": "肥料の混ぜ方を変えた → ECが急上昇",
+        "title_en": "Changed fertilizer mixing → EC spiked",
+        "detail_jp": "ホーグス1号と硝酸石灰を同じバケツで混ぜていたことで、約47%の成分が沈殿して失われていた。別々のバケツで溶かしてから投入する方式に変更したところ、ECが 2.0 → 3.6 mS/cm に急上昇。",
+        "detail_en": "Hoagus No.1 and calcium nitrate were being mixed in the same bucket, causing ~47% of nutrients to precipitate out. Switched to separate buckets. EC jumped from 2.0 → 3.6 mS/cm immediately.",
+        "result_jp": "⚠️ ECセンサーが壊れているか、旧来の処方量が約2〜4倍の過剰だった可能性がある。新センサー確認待ち。",
+        "result_en": "⚠️ Either the sensor is faulty, or our old recipe was 2–4× too concentrated. Awaiting new sensor to confirm."
+      }
+    ],
+    "active_issues": [
+      {
+        "priority": "critical",
+        "badge_jp": "🔴 緊急",
+        "badge_en": "🔴 Urgent",
+        "title_jp": "ECセンサー確認 → 処方の全面見直し",
+        "title_en": "EC sensor check → Full recipe revision",
+        "body_jp": "新センサー到着待ち（2026-04-02時点）。EC 3.6が本当なら現処方は過剰。ホーグス1号を約1.0〜1.25kg、硝酸石灰を約0.65〜0.85kgに大幅削減が必要になる。",
+        "body_en": "New sensor on order. If EC 3.6 is real, current recipe is dangerously over-concentrated. Hoagus No.1 should drop to ~1.0–1.25 kg and calcium nitrate to ~0.65–0.85 kg (per 2,000 L).",
+        "action_jp": "→ センサー到着次第すぐ測定",
+        "action_en": "→ Measure immediately on sensor arrival"
+      },
+      {
+        "priority": "critical",
+        "badge_jp": "🔴 最重要",
+        "badge_en": "🔴 Critical",
+        "title_jp": "夏のハウス冷却設備がない",
+        "title_en": "No summer cooling system in the greenhouse",
+        "body_jp": "40年間未投資。最高50℃まで上昇。他社はパッド＆ファン等を整備済み。ミスト＋ファン方式の設計はほぼ固まったが、1レーン分のテスト導入がまだ。",
+        "body_en": "No investment for 40 years. Peak temperature hits 50°C. Competitors have pad-and-fan systems. Mist + fan design mostly decided but 1-lane test not yet installed.",
+        "action_jp": "→ 6月までにテスト導入完了が目標",
+        "action_en": "→ Goal: complete test installation before June"
+      },
+      {
+        "priority": "critical",
+        "badge_jp": "🔴 最重要",
+        "badge_en": "🔴 Critical",
+        "title_jp": "豆苗の根腐れ問題（再発リスクあり）",
+        "title_en": "Pea shoot root rot (risk of recurrence)",
+        "body_jp": "最悪時に8〜9割が廃棄。現在は落ち着いているが、いつ再発するかわからない。記録がないことが原因特定を妨げている。",
+        "body_en": "At peak, 80–90% of batches were discarded. Currently stable, but reoccurrence is unpredictable. Lack of records prevents identifying the cause.",
+        "action_jp": "→ 記録シートを作り、毎ロット残す習慣を",
+        "action_en": "→ Create a batch log and build the habit now"
+      },
+      {
+        "priority": "critical",
+        "badge_jp": "🔴 緊急",
+        "badge_en": "🔴 Urgent",
+        "title_jp": "塩素消毒設備がない",
+        "title_en": "No water chlorination system",
+        "body_jp": "井戸水に消毒機構なし。初期菌数が競合より高い可能性。日持ちクレームに直結している可能性がある。",
+        "body_en": "Well water pump has no chlorination. Initial bacterial count may be higher than competitors. Likely contributing to shelf-life complaints.",
+        "action_jp": null,
+        "action_en": null
+      },
+      {
+        "priority": "high",
+        "badge_jp": "🟠 重要",
+        "badge_en": "🟠 Important",
+        "title_jp": "品質のばらつきと日持ちの短さ",
+        "title_en": "Inconsistent quality and short shelf life",
+        "body_jp": "形・色・鮮度が安定しない。他社比で棚持ちが著しく短いとのクレームあり。温度不安定・展開タイミングのばらつき・菌数管理が複合的に影響。",
+        "body_en": "Shape, color, and freshness are inconsistent. Complaints that shelf life is shorter than competitors. Temperature instability, inconsistent transfer timing, and bacterial count all contribute.",
+        "action_jp": null,
+        "action_en": null
+      }
+    ],
+    "near_term": [
+      {
+        "action_jp": "新ECセンサーで養液を再測定",
+        "action_en": "Re-measure with new EC sensor",
+        "deadline_jp": "到着次第すぐ",
+        "deadline_en": "ASAP",
+        "cost_jp": "0円（発注済み）",
+        "cost_en": "¥0 (ordered)"
+      },
+      {
+        "action_jp": "井戸水の原水ECを測定・記録",
+        "action_en": "Measure source water EC",
+        "deadline_jp": "今月中",
+        "deadline_en": "This month",
+        "cost_jp": "0円",
+        "cost_en": "¥0"
+      },
+      {
+        "action_jp": "ミスト設備：ハウス天井高・水やり機寸法を測定",
+        "action_en": "Measure greenhouse height and watering machine dimensions",
+        "deadline_jp": "今月中",
+        "deadline_en": "This month",
+        "cost_jp": "0円",
+        "cost_en": "¥0"
+      },
+      {
+        "action_jp": "ミスト1レーン分を発注・テスト設置",
+        "action_en": "Order and install mist system test lane",
+        "deadline_jp": "5月末まで",
+        "deadline_en": "By end of May",
+        "cost_jp": "1〜2万円",
+        "cost_en": "¥10,000–20,000"
+      },
+      {
+        "action_jp": "豆苗ロット記録シートを作り記録開始",
+        "action_en": "Create pea shoot batch log and start recording",
+        "deadline_jp": "今週中",
+        "deadline_en": "This week",
+        "cost_jp": "0円",
+        "cost_en": "¥0"
+      }
+    ]
+  },
+  "tab2": {
+    "hero": {
+      "month": 4,
+      "title_jp": "4月 — 春の切り替え期",
+      "title_en": "April — Spring Transition",
+      "subtitle_jp": "気温上昇開始。夏対策の準備を始める最後のチャンス。",
+      "subtitle_en": "Temperatures beginning to rise. Last window to prepare for summer challenges.",
+      "tasks": [
+        {
+          "priority": "now",
+          "jp": "新ECセンサーで養液を再測定 → 処方を決定し直す",
+          "en": "Re-measure nutrient solution with new EC sensor → Finalize recipe"
+        },
+        {
+          "priority": "now",
+          "jp": "井戸水の原水ECを測定（肥料を入れる前の水）",
+          "en": "Measure source well water EC (before adding fertilizer)"
+        },
+        {
+          "priority": "plan",
+          "jp": "ハウス天井高・水やり機の寸法を測定し、ミスト設計を完成させる",
+          "en": "Measure greenhouse ceiling height and watering machine dimensions to finalize mist design"
+        },
+        {
+          "priority": "plan",
+          "jp": "豆苗ロット記録シートを作成し、記録の習慣を開始",
+          "en": "Create pea shoot batch log sheet and start recording each batch"
+        },
+        {
+          "priority": "prep",
+          "jp": "ミスト1レーン分の部材を発注・5月設置に向けて準備",
+          "en": "Order mist system parts for 1 lane — prepare for May installation"
+        },
+        {
+          "priority": "prep",
+          "jp": "EC削減試験（豆苗 2.0 → 1.5）の計画を立てる",
+          "en": "Plan EC reduction trial for pea shoots (2.0 → 1.5 mS/cm)"
+        }
+      ]
+    },
+    "annual": {
+      "5": {
+        "season": "spring",
+        "label_jp": "春",
+        "label_en": "Spring",
+        "tasks_jp": [
+          "ミスト1レーン テスト設置",
+          "遮光ネット設置（ハウス）",
+          "EC削減試験（豆苗）開始"
+        ],
+        "tasks_en": [
+          "Install mist test lane",
+          "Install shade netting",
+          "Start EC reduction trial (pea)"
+        ]
+      },
+      "6": {
+        "season": "summer",
+        "label_jp": "初夏",
+        "label_en": "Early Summer",
+        "tasks_jp": [
+          "ミスト冷却システム稼働開始",
+          "夏季EC削減（1.0〜1.2）切り替え",
+          "散水回数を増やす"
+        ],
+        "tasks_en": [
+          "Mist cooling system — start operation",
+          "Switch to summer EC (1.0–1.2)",
+          "Increase watering frequency"
+        ]
+      },
+      "7": {
+        "season": "summer",
+        "label_jp": "真夏",
+        "label_en": "Summer",
+        "tasks_jp": [
+          "⚠️ ブロッコリー生育限界注意",
+          "とろけ発生率を毎日記録",
+          "ハウス最高温度を毎日確認"
+        ],
+        "tasks_en": [
+          "⚠️ Broccoli growth limit risk",
+          "Log melt rate daily",
+          "Check peak greenhouse temp daily"
+        ]
+      },
+      "8": {
+        "season": "summer",
+        "label_jp": "猛暑",
+        "label_en": "Peak Heat",
+        "tasks_jp": [
+          "⚠️ 最も注意が必要な月",
+          "とろけ・品質劣化が最大リスク",
+          "ミスト+ファン24時間対応"
+        ],
+        "tasks_en": [
+          "⚠️ Highest-risk month",
+          "Melt and quality loss are peak risks",
+          "Mist + fan monitoring all day"
+        ]
+      },
+      "9": {
+        "season": "fall",
+        "label_jp": "秋",
+        "label_en": "Fall",
+        "tasks_jp": [
+          "夏季終了・通常ECへ段階復帰",
+          "夏の記録を振り返り",
+          "設備のメンテナンス"
+        ],
+        "tasks_en": [
+          "End summer mode, restore EC",
+          "Review summer records",
+          "Equipment maintenance"
+        ]
+      },
+      "10": {
+        "season": "fall",
+        "label_jp": "秋",
+        "label_en": "Fall",
+        "tasks_jp": [
+          "安定期・品質データの整理",
+          "冬対策の計画開始",
+          "来年の夏対策の改善点まとめ"
+        ],
+        "tasks_en": [
+          "Stable season, organize quality data",
+          "Begin winter prep planning",
+          "Document summer improvement notes"
+        ]
+      },
+      "11": {
+        "season": "winter",
+        "label_jp": "初冬",
+        "label_en": "Pre-winter",
+        "tasks_jp": [
+          "冬季EC・処方への切り替え準備",
+          "加温コスト・計画を確認",
+          "豆苗のハウス日数延長に備える"
+        ],
+        "tasks_en": [
+          "Prep winter EC and recipe switch",
+          "Review heating costs and plan",
+          "Prepare for extended pea shoot days"
+        ]
+      },
+      "12": {
+        "season": "winter",
+        "label_jp": "冬",
+        "label_en": "Winter",
+        "tasks_jp": [
+          "年間振り返り・記録の整理",
+          "冬季管理本格稼働",
+          "来年の計画・発注準備"
+        ],
+        "tasks_en": [
+          "Annual review, organize records",
+          "Full winter management mode",
+          "Plan and prepare orders for next year"
+        ]
+      },
+      "1": {
+        "season": "winter",
+        "label_jp": "冬",
+        "label_en": "Winter",
+        "tasks_jp": [
+          "冬季管理（成長遅い・豆苗12日）",
+          "年間計画・種の発注確認",
+          "設備の冬季メンテナンス"
+        ],
+        "tasks_en": [
+          "Winter management (slow growth)",
+          "Annual planning, seed orders",
+          "Equipment winter maintenance"
+        ]
+      },
+      "2": {
+        "season": "winter",
+        "label_jp": "冬",
+        "label_en": "Winter",
+        "tasks_jp": [
+          "春に向けたEC設定の確認",
+          "夏冷却計画の検討開始",
+          "遮光ネットの在庫確認"
+        ],
+        "tasks_en": [
+          "Review EC settings for spring",
+          "Begin summer cooling planning",
+          "Check shade netting inventory"
+        ]
+      },
+      "3": {
+        "season": "spring",
+        "label_jp": "春",
+        "label_en": "Spring",
+        "tasks_jp": [
+          "春季への切り替え・温度確認",
+          "A液B液の別バケツ運用定着確認",
+          "夏冷却設備の計画を固める"
+        ],
+        "tasks_en": [
+          "Spring transition, temp checks",
+          "Confirm separate bucket protocol",
+          "Finalize summer cooling plan"
+        ]
+      }
+    }
+  },
+  "tab3": {
+    "vision_jp": null,
+    "vision_en": null,
+    "priorities": [
+      {
+        "num": 1,
+        "title_jp": "確実な出荷（欠品ゼロ）",
+        "title_en": "Fulfill every order — zero stockouts",
+        "desc_jp": "注文が来た日に必ず出荷できること。欠品は即座に信頼を失い、取引停止につながる。これが農場の存在価値そのもの。",
+        "desc_en": "Ship on the same day an order arrives. A single stockout causes immediate loss of trust and risks contract termination. This is the farm's core value proposition."
+      },
+      {
+        "num": 2,
+        "title_jp": "品質の安定",
+        "title_en": "Consistent quality",
+        "desc_jp": "毎回同じ品質を届けること。ばらつきはクレームと返品につながる。長さ・色・鮮度を一定に保つ。",
+        "desc_en": "Deliver the same quality every time. Variation leads to complaints and returns. Control length, color, and freshness consistently."
+      },
+      {
+        "num": 3,
+        "title_jp": "コストを低く保つ",
+        "title_en": "Keep costs low",
+        "desc_jp": "資材・種・パックを無駄にしない。人の時間を有効に使う。ただし1位・2位を損なわない範囲で追求する。",
+        "desc_en": "Avoid waste in materials, seeds, and packaging. Use staff time efficiently. Pursue this only without compromising priorities 1 and 2."
+      }
+    ],
+    "market_insight_jp": "スーパーがスプラウトを仕入れる本質的な理由は「リスクヘッジ」だ。路地野菜が入らないとき、野菜コーナーが空にならないようにスプラウトで棚を埋める。逆に、野菜が豊作・安値のときは、スプラウトは棚でほとんど動かず廃棄されている。",
+    "market_insight_en": "Supermarkets stock sprouts primarily as a hedge against produce shortages. When field vegetables are unavailable, sprouts fill the shelf. When vegetables are abundant and cheap, sprouts barely sell and are likely discarded.",
+    "market_warn_jp": "⚠️ だからこそ「欠品しない農場」であり続けることが、唯一の競争力になる。価格では勝てない。常に来ることが武器。",
+    "market_warn_en": "⚠️ This is exactly why being the farm that never stockouts is our only competitive advantage. We can't win on price. Reliability is our weapon.",
+    "goals": []
+  },
+  "tab4": {
+    "kaiwari": {
+      "name_jp": "かいわれ大根",
+      "name_en": "Daikon Sprouts",
+      "icon": "🌱",
+      "profile": [
+        {
+          "item_jp": "ハウス滞在日数",
+          "item_en": "Greenhouse days",
+          "val_jp": "夏：2日 ／ 冬：4日",
+          "val_en": "Summer: 2 days / Winter: 4 days"
+        },
+        {
+          "item_jp": "仕込み→収穫",
+          "item_en": "Sow to harvest",
+          "val_jp": "夏：約5日 ／ 冬：約7日",
+          "val_en": "Summer: ~5 days / Winter: ~7 days"
+        },
+        {
+          "item_jp": "ハウスへ展開",
+          "item_en": "Transfer to GH",
+          "val_jp": "Day 3 朝（根がトレー底から少し出たら）",
+          "val_en": "Day 3 morning (when roots just visible at tray bottom)"
+        },
+        {
+          "item_jp": "浸種温度",
+          "item_en": "Soak temp",
+          "val_jp": "25℃ 目標",
+          "val_en": "Target 25°C",
+          "strong": true
+        },
+        {
+          "item_jp": "発芽室温度",
+          "item_en": "Germination room",
+          "val_jp": "20℃（年間固定）",
+          "val_en": "20°C (fixed year-round)"
+        },
+        {
+          "item_jp": "遮光工程",
+          "item_en": "Light blocking",
+          "val_jp": "あり（発芽室で遮光 → ハウスで緑化）",
+          "val_en": "Yes (dark in germ. room → greening in greenhouse)"
+        },
+        {
+          "item_jp": "肥料依存度",
+          "item_en": "Fertilizer need",
+          "val_jp": "高い（Ca・微量要素が品質に直結）",
+          "val_en": "High (Ca and micronutrients critical for quality)"
+        },
+        {
+          "item_jp": "環境適応性",
+          "item_en": "Adaptability",
+          "val_jp": "3品種で最も強い。安定した栽培が可能",
+          "val_en": "Highest of the 3 varieties — most stable to grow",
+          "strong": true
+        }
+      ],
+      "risks": [
+        {
+          "type": "amber",
+          "label_jp": "夏のリスク",
+          "label_en": "Summer Risk",
+          "title_jp": "高温での徒長・とろけ・軸強度の低下",
+          "title_en": "High-temp etiolation, melt, weak stems",
+          "body_jp": "ハウスが高温になると成長が急速になりすぎて軸が細く弱くなる。さらに高温障害でとろけが発生し、出荷不可になる。",
+          "body_en": "Excessive heat causes overly rapid growth, weakening stems. Heat damage then leads to melt — making batches unshippable."
+        },
+        {
+          "type": "blue",
+          "label_jp": "Ca欠乏",
+          "label_en": "Ca Deficiency",
+          "title_jp": "チップバーン（葉縁の枯れ）",
+          "title_en": "Tipburn (leaf edge browning)",
+          "body_jp": "葉の縁が茶色く枯れる症状。Caが不足しているサイン。EC削減時に特に注意。硝酸石灰の量は削りすぎない。",
+          "body_en": "Brown dry edges on leaves. A sign of calcium deficiency. Watch closely during EC reduction. Don't cut calcium nitrate too aggressively."
+        },
+        {
+          "type": "gray",
+          "label_jp": "発芽ばらつき",
+          "label_en": "Uneven Germination",
+          "title_jp": "黄色いものが製品に混ざる",
+          "title_en": "Yellow sprouts mixed into product",
+          "body_jp": "浸種時の水温が不安定だと発芽にばらつきが出る。浸種温度を25℃に安定させることが対策。",
+          "body_en": "Unstable soaking water temperature causes uneven germination. Stabilize soak temperature at 25°C."
+        }
+      ]
+    },
+    "broccoli": {
+      "name_jp": "ブロッコリースプラウト",
+      "name_en": "Broccoli Sprouts",
+      "icon": "🥦",
+      "profile": [
+        {
+          "item_jp": "ハウス滞在日数",
+          "item_en": "Greenhouse days",
+          "val_jp": "夏：約2.5日 ／ 冬：約4.5日",
+          "val_en": "Summer: ~2.5 days / Winter: ~4.5 days"
+        },
+        {
+          "item_jp": "ハウスへ展開",
+          "item_en": "Transfer to GH",
+          "val_jp": "Day 3 朝",
+          "val_en": "Day 3 morning"
+        },
+        {
+          "item_jp": "浸種温度",
+          "item_en": "Soak temp",
+          "val_jp": "20℃以下 厳守",
+          "val_en": "20°C or below — strictly enforced",
+          "strong": true
+        },
+        {
+          "item_jp": "特徴成分",
+          "item_en": "Key nutrient",
+          "val_jp": "スルフォラファン（抗酸化物質）",
+          "val_en": "Sulforaphane (antioxidant)"
+        },
+        {
+          "item_jp": "温度感受性",
+          "item_en": "Temp sensitivity",
+          "val_jp": "3品種で最もデリケート。25℃超で品質低下",
+          "val_en": "Most sensitive of the 3 — quality drops above 25°C",
+          "strong": true
+        },
+        {
+          "item_jp": "低温適性",
+          "item_en": "Cold tolerance",
+          "val_jp": "本来は寒さに強い品種",
+          "val_en": "Naturally cold-tolerant variety"
+        }
+      ],
+      "risks": [
+        {
+          "type": "red",
+          "label_jp": "🔴 最重要",
+          "label_en": "🔴 Critical",
+          "title_jp": "浸種温度を高くすると腐敗する",
+          "title_en": "High soaking temperature causes rot",
+          "body_jp": "冬場に30℃で浸種した結果、発芽室で腐敗・悪臭が発生した実例あり。20℃を超えてはならない。",
+          "body_en": "A real incident: soaking at 30°C in winter caused rot and foul odor. Never exceed 20°C for soaking."
+        },
+        {
+          "type": "amber",
+          "label_jp": "夏のリスク",
+          "label_en": "Summer Risk",
+          "title_jp": "葉が開かない「ツンツン」症状",
+          "title_en": "\"Straight spike\" — leaves won't open",
+          "body_jp": "ハウスが40〜50℃になると葉が一切開かず、茎だけ伸びた状態になる。2024年夏に発生確認。",
+          "body_en": "At 40–50°C, leaves stop opening and only the stem elongates. Confirmed in summer 2024."
+        },
+        {
+          "type": "gray",
+          "label_jp": "原因不明",
+          "label_en": "Unknown Cause",
+          "title_jp": "根高（ねだか）症状",
+          "title_en": "Root rise — raised root base",
+          "body_jp": "根が培地を押し上げ、可食部の茎が極端に短くなる。原因は未特定。",
+          "body_en": "Roots push up through the growing medium, making edible stems extremely short. Cause unknown."
+        }
+      ]
+    },
+    "pea": {
+      "name_jp": "豆苗",
+      "name_en": "Pea Shoots",
+      "icon": "🟢",
+      "profile": [
+        {
+          "item_jp": "ハウスへ展開",
+          "item_en": "Transfer to GH",
+          "val_jp": "Day 4 朝（かいわれより1日遅い）",
+          "val_en": "Day 4 morning (1 day later than daikon)"
+        },
+        {
+          "item_jp": "ハウス滞在日数",
+          "item_en": "Greenhouse days",
+          "val_jp": "夏：4日（最短）／ 冬：12日（10℃設定）",
+          "val_en": "Summer: 4 days (min) / Winter: 12 days (at 10°C)"
+        },
+        {
+          "item_jp": "遮光工程",
+          "item_en": "Light blocking",
+          "val_jp": "なし（光合成が必要）",
+          "val_en": "None (needs photosynthesis)"
+        },
+        {
+          "item_jp": "ハウス管理",
+          "item_en": "Greenhouse",
+          "val_jp": "かいわれとは別ハウス。独立した温度管理が可能",
+          "val_en": "Separate greenhouse from daikon — independent temp control",
+          "strong": true
+        },
+        {
+          "item_jp": "冬季戦略",
+          "item_en": "Winter strategy",
+          "val_jp": "最小暖房（10℃設定）で低温長期栽培",
+          "val_en": "Minimum heating (10°C) — grow longer at lower temp to save energy"
+        },
+        {
+          "item_jp": "肥料依存度",
+          "item_en": "Fertilizer need",
+          "val_jp": "低い（種子の貯蔵養分が多いため）",
+          "val_en": "Low — seed stores its own nutrients",
+          "strong": true
+        },
+        {
+          "item_jp": "EC削減余地",
+          "item_en": "EC reduction room",
+          "val_jp": "大きい。業界標準は無肥料〜EC 1.0程度",
+          "val_en": "Large — industry standard is no fertilizer to EC ~1.0",
+          "strong": true
+        }
+      ],
+      "root_rot": {
+        "stages": [
+          {
+            "stage_jp": "健康",
+            "stage_en": "Healthy",
+            "color": "green",
+            "desc_jp": "真っ白で絹のような根が絡み合い下にまとまっている",
+            "desc_en": "Bright white, silky roots tangled together at the bottom"
+          },
+          {
+            "stage_jp": "初期",
+            "stage_en": "Early",
+            "color": "amber",
+            "desc_jp": "根の一部が茶色くなる。葉は問題ないため出荷できることもある",
+            "desc_en": "Some roots turning brown. Leaves still OK — may still be shippable"
+          },
+          {
+            "stage_jp": "中期",
+            "stage_en": "Mid",
+            "color": "amber",
+            "desc_jp": "茶色い部分が広がりドロドロになる。特有の匂いが発生",
+            "desc_en": "Brown spreading, slimy texture, distinctive odor develops"
+          },
+          {
+            "stage_jp": "末期",
+            "stage_en": "Late",
+            "color": "red",
+            "desc_jp": "種の部分まで侵食。種が真っ黒になり成長が著しく止まる",
+            "desc_en": "Spread to seeds — seeds turn black, growth stops completely"
+          }
+        ],
+        "causes": [
+          {
+            "jp": "発芽室での乾燥 — 水が乾くと発生しやすい",
+            "en": "Drying out in germination room — root rot more likely when water runs out"
+          },
+          {
+            "jp": "種温度の上昇 — 密集＋水不足で種自体の温度が上がり誘発",
+            "en": "Seed temperature rising — dense packing + low water raises internal temp, triggering rot"
+          },
+          {
+            "jp": "菌の蓄積 — 大量の水で洗い流して菌量を調整する考え方あり",
+            "en": "Bacterial buildup — flushing with large volumes of water to reduce bacterial load"
+          }
+        ],
+        "warn_jp": "発芽室から出た時点で根腐れが少しでも見えている場合、ハウスに入ってから悪化する。早期発見が重要。",
+        "warn_en": "If any root rot is visible when leaving the germination room, it will worsen in the greenhouse. Early detection is critical.",
+        "action_jp": "各ロットで「播種日・発芽室の様子・根腐れ発生率・変更した条件」を記録する習慣をつける。記録がないと原因の特定が永遠にできない。",
+        "action_en": "Record every batch — sowing date, germination room conditions, root rot rate, any changes made. Without records, we can never identify the cause."
+      }
+    }
+  },
+  "tab5": {
+    "categories": [
+      {
+        "label_jp": "💧 養液・肥料管理",
+        "label_en": "💧 Nutrient Management",
+        "rules": [
+          {
+            "id": "R-01",
+            "status": "confirmed",
+            "title_jp": "A液・B液は必ず別々のバケツで溶かしてから投入する",
+            "title_en": "Always dissolve fertilizers in separate buckets before adding to tank",
+            "why_jp": "ホーグス1号と硝酸石灰を同じバケツで混ぜると化学反応が起き、カルシウムが不溶化して沈殿する。成分の約47%が失われていた。2026年4月に発覚。",
+            "why_en": "Mixing Hoagus No.1 and calcium nitrate together causes calcium phosphate precipitation — roughly 47% of nutrients were being lost. Discovered in April 2026.",
+            "action_jp": "ホーグス1号 → 別バケツで溶解 → タンクへ。その後、硝酸石灰 → 別バケツで溶解 → タンクへ。",
+            "action_en": "Hoagus No.1 → dissolve in Bucket A → add to tank. Then calcium nitrate → dissolve in Bucket B → add to tank."
+          },
+          {
+            "id": "R-03",
+            "status": "confirmed",
+            "title_jp": "ECは撹拌してから測定する",
+            "title_en": "Always stir before measuring EC",
+            "why_jp": "撹拌前後でEC値が変動する。撹拌なしで測ると実態を反映しない値になり、処方の判断が狂う。",
+            "why_en": "EC readings change depending on whether the solution is stirred. Unstirred readings don't reflect actual concentration and lead to wrong dosing decisions.",
+            "action_jp": null,
+            "action_en": null
+          },
+          {
+            "id": "R-02",
+            "status": "trial",
+            "title_jp": "夏季（6〜9月）はEC 1.0〜1.2に下げる",
+            "title_en": "Summer (June–Sep): reduce EC to 1.0–1.2 mS/cm",
+            "why_jp": "高温期は植物の蒸散が増え、水を多く吸う。同じEC値でも夏は「実質的に濃い」状態になり、とろけが増える。",
+            "why_en": "In hot weather, plants transpire more and absorb more water. The same EC solution becomes effectively more concentrated — causing melt damage.",
+            "action_jp": "⚠️ まだ試験未着手。今夏に段階的に実施予定。",
+            "action_en": "⚠️ Not yet tested. Planned for gradual implementation this summer."
+          },
+          {
+            "id": "R-04",
+            "status": "reviewing",
+            "title_jp": "井戸水の原水ECを定期的に測定・記録する",
+            "title_en": "Regularly measure and record source water EC",
+            "why_jp": "肥料を入れる前の水のECを知らないと、処方の正確な計算ができない。季節によって井戸水の成分が変化する可能性もある。",
+            "why_en": "Without knowing the source water's baseline EC, fertilizer recipes can't be calculated accurately. Seasonal variation in well water composition is also possible.",
+            "action_jp": null,
+            "action_en": null
+          }
+        ]
+      },
+      {
+        "label_jp": "🌡️ 温度・環境管理",
+        "label_en": "🌡️ Temperature Management",
+        "rules": [
+          {
+            "id": "R-05",
+            "status": "confirmed",
+            "title_jp": "夏のハウス温度対策を最優先課題にする",
+            "title_en": "Summer greenhouse temperature is the top priority",
+            "why_jp": "ハウスが50℃に達することが実測されている。ブロッコリーはこの温度帯で栽培限界を超える。競合他社はすでに対応済み。40年間未解決の問題。",
+            "why_en": "Greenhouse temperatures have been measured at 50°C. Broccoli exceeds its growth limit at this temperature. Competitors have already addressed this. 40 years unresolved.",
+            "action_jp": null,
+            "action_en": null
+          },
+          {
+            "id": "R-06",
+            "status": "confirmed",
+            "title_jp": "発芽室とハウスの温度は別々に管理する",
+            "title_en": "Manage germination room and greenhouse temperatures separately",
+            "why_jp": "発芽期と生育期では最適温度が異なる。特にブロッコリーの浸種は20℃以下厳守。",
+            "why_en": "Optimal temperatures differ between germination and growth stages. Broccoli seed soaking must stay at 20°C or below.",
+            "action_jp": null,
+            "action_en": null
+          }
+        ]
+      },
+      {
+        "label_jp": "🧼 品質・衛生管理",
+        "label_en": "🧼 Quality & Hygiene",
+        "rules": [
+          {
+            "id": "R-07",
+            "status": "reviewing",
+            "title_jp": "水の塩素消毒体制を整備する",
+            "title_en": "Establish water chlorination system",
+            "why_jp": "現在、消毒設備がない。初期菌数が競合より高い可能性があり、日持ち短さのクレームに直結している可能性がある。",
+            "why_en": "Currently no chlorination. Initial bacterial count may be higher than competitors — likely contributing to shelf-life complaints.",
+            "action_jp": null,
+            "action_en": null
+          }
+        ]
+      },
+      {
+        "label_jp": "📦 生産・出荷",
+        "label_en": "📦 Production & Shipping",
+        "rules": [
+          {
+            "id": "R-08",
+            "status": "confirmed",
+            "title_jp": "生産計画は「先週の同じ曜日の出荷実績」を基準にする",
+            "title_en": "Base production plan on \"same weekday last week\" shipment data",
+            "why_jp": "曜日ごとに需要パターンが安定している。当日注文→当日出荷が業界要件で、欠品は許容されない。",
+            "why_en": "Demand follows a stable weekly pattern by day. Same-day ordering and shipping is the industry standard — stockouts are not acceptable.",
+            "action_jp": null,
+            "action_en": null
+          }
+        ]
+      }
+    ]
+  },
+  "tab6": {
+    "cultivation": [
+      {
+        "icon": "🌿",
+        "title_jp": "スプラウトのEC管理 — スプラウト専用の養液は「薄く」が基本",
+        "title_en": "EC Management for Sprouts — Less is More",
+        "desc_jp": "成株用のEC推奨値（2.0〜3.0 mS/cm）をスプラウトにそのまま使うのは過剰。スプラウトは根が浅く吸収速度が速いため、EC 0.8〜1.5程度で十分な研究がある。当農場の「EC 2.0が正しいのか」を問い直すきっかけになった知見。",
+        "desc_en": "EC recommendations for mature plants (2.0–3.0 mS/cm) are too high for sprouts. With shallow roots and fast absorption, EC 0.8–1.5 is typically sufficient. This insight prompted us to question whether our EC 2.0 is actually correct.",
+        "tag_jp": "養液管理",
+        "tag_en": "Nutrient Solution"
+      },
+      {
+        "icon": "🌡️",
+        "title_jp": "高温障害のメカニズム — なぜ夏に「とろける」のか",
+        "title_en": "Heat Damage Mechanism — Why Sprouts \"Melt\" in Summer",
+        "desc_jp": "高温（30℃超）になると植物細胞の代謝が乱れ、呼吸優先になって糖分が消費され、軟化・腐敗が急速に進む。スプラウトは茎が細く水分が多いため特に影響を受けやすい。冷却が1℃下がるだけで大きな差になる理由はここにある。",
+        "desc_en": "Above 30°C, plant cell metabolism breaks down — respiration dominates, consuming sugars, leading to rapid softening and decay. Sprouts are especially vulnerable due to their thin stems and high water content.",
+        "tag_jp": "温度管理",
+        "tag_en": "Temperature"
+      }
+    ],
+    "market": [
+      {
+        "icon": "🏪",
+        "title_jp": "スーパーの野菜コーナーの構造 — 私たちの商品はどう見られているか",
+        "title_en": "Supermarket Produce Section — How Our Product Is Perceived",
+        "desc_jp": "スーパーのバイヤーがスプラウトを選ぶ基準は「価格」よりも「常に棚を埋めてくれるか」。路地野菜が入らない時期のリスクヘッジとして機能している。",
+        "desc_en": "Supermarket buyers choose sprout suppliers based on reliability — not price. Sprouts serve as a hedge when field vegetables aren't available.",
+        "tag_jp": "市場理解",
+        "tag_en": "Market Understanding"
+      }
+    ],
+    "business": [],
+    "challenge": [
+      {
+        "icon": "💎",
+        "title_jp": "ノーサンが持っている強み — まだ使いきれていないポテンシャル",
+        "title_en": "NOSON's Hidden Strengths — Untapped Potential",
+        "desc_jp": "年間15℃・豊富な井戸水（水代ゼロ）は、夏の冷却を低コストで実現できる独自の資産。40年の経験知。創業から続く取引先との信頼。これらは競合が簡単には真似できない強みだ。",
+        "desc_en": "Year-round 15°C well water at zero cost is a unique asset for low-cost summer cooling. 40 years of accumulated knowledge. Long-standing customer relationships. These can't be easily replicated.",
+        "tag_jp": "強み分析",
+        "tag_en": "Strengths"
+      }
+    ]
+  }
+}
+</script>
+
+<!-- ===================== RENDERING ENGINE ===================== -->
+<script>
+const D = JSON.parse(document.getElementById('farm-data').textContent);
+const L = () => document.body.getAttribute('lang') === 'en' ? 'en' : 'jp';
+const t = (obj, key) => obj[key + '_' + L()] ?? obj[key + '_jp'] ?? '';
+const esc = s => s ? String(s).replace(/&/g,'&amp;').replace(/</g,'&lt;').replace(/>/g,'&gt;') : '';
+
+// ── UTILS ──────────────────────────────────────────────
+function badgeClass(priority) {
+  return {critical:'badge-red', high:'badge-amber', important:'badge-amber'}[priority] ?? 'badge-gray';
+}
+function statusBadge(status, lang) {
+  const map = {
+    confirmed: {jp:'確定ルール', en:'Confirmed'},
+    trial:     {jp:'試験中',     en:'Trial'},
+    reviewing: {jp:'検討中',     en:'Under Review'}
+  };
+  const cls = {confirmed:'badge-green', trial:'badge-amber', reviewing:'badge-gray'}[status] ?? 'badge-gray';
+  return `<span class="badge ${cls}">${map[status]?.[lang] ?? status}</span>`;
+}
+function seasonBadge(season, label) {
+  return `<span class="month-season-badge season-${season}">${esc(label)}</span>`;
+}
+
+// ── TAB 1: 今の農場 ────────────────────────────────────
+function renderTab1() {
+  const d = D.tab1;
+  const l = L();
+
+  // Focus card
+  const items = d.focus.items.map(i => `
+    <div class="focus-item"><div class="focus-dot"></div><span>${esc(i[l])}</span></div>`).join('');
+
+  // Recent changes
+  const changes = d.recent_changes.map(c => `
+    <div class="change-item">
+      <div class="change-date">${esc(c.date)}</div>
+      <div class="change-content">
+        <div class="change-title">${esc(c['title_'+l])}</div>
+        <div class="change-detail">${esc(c['detail_'+l])}</div>
+        ${c['result_'+l] ? `<div class="change-result">${esc(c['result_'+l])}</div>` : ''}
       </div>
-      <div class="task-detail jp-only">ホーグス1号と硝酸石灰を同じバケツで混ぜると沈殿が発生し、カルシウムが失われている。バケツを2個に分けて別々に溶かしてから水槽に投入する方法に変更する。</div>
-      <div class="task-detail en-only">Mixing Hoagus No.1 and calcium nitrate in the same bucket causes calcium phosphate precipitation, depleting Ca from the solution. Switch to two separate buckets. See Fertilizer tab for step-by-step instructions.</div>
-      <div class="task-action jp-only">✅ 手順は「肥料・養液」タブを参照</div>
-      <div class="task-action en-only">✅ See Fertilizer tab → "New Mixing Procedure"</div>
-    </div>
+    </div>`).join('');
 
-    <div class="task-item">
-      <div class="task-head"><span class="badge b-red"><span class="jp-only">最重要</span><span class="en-only">High</span></span>
-        <span class="task-title jp-only">EC最適化（肥料削減）</span>
-        <span class="task-title en-only">EC optimization (fertilizer reduction)</span>
+  // Active issues
+  const issues = d.active_issues.map(i => `
+    <div class="issue-item">
+      <div class="issue-head">
+        <span class="badge ${badgeClass(i.priority)}">${esc(i['badge_'+l])}</span>
+        <div class="issue-title">${esc(i['title_'+l])}</div>
       </div>
-      <div class="task-detail jp-only">現在のEC 2.0は過剰の可能性。新しい混ぜ方に変えた後、春はEC 1.5を目標に試験開始。ECメーターで測りながら調整する。</div>
-      <div class="task-detail en-only">Current EC 2.0 is likely excessive. After switching mixing method, begin spring trial at EC 1.5 (Hoagus 2.25 kg + calcium nitrate 1.5 kg). Adjust while measuring with EC meter.</div>
-      <div class="task-prereq jp-only">⚠️ 前提：先に混ぜ方の変更を完了させること</div>
-      <div class="task-prereq en-only">⚠️ Prerequisite: Complete mixing method change first</div>
-    </div>
+      <div class="issue-body">${esc(i['body_'+l])}</div>
+      ${i['action_'+l] ? `<div class="issue-action">${esc(i['action_'+l])}</div>` : ''}
+    </div>`).join('');
 
-    <div class="task-item">
-      <div class="task-head"><span class="badge b-red"><span class="jp-only">緊急</span><span class="en-only">Urgent</span></span>
-        <span class="task-title jp-only">井戸水のEC・pH測定</span>
-        <span class="task-title en-only">Measure well water EC and pH</span>
-      </div>
-      <div class="task-detail jp-only">肥料を入れる前の井戸水をECメーター・pHメーターで測定する（3,000〜5,000円）。これがないと処方の計算精度が上がらない。</div>
-      <div class="task-detail en-only">Purchase an EC meter and pH meter (approx. ¥3,000–5,000). Measure source water before adding fertilizer to improve calculation accuracy.</div>
-      <div class="task-prereq jp-only">⚠️ 前提：ECメーター・pHメーターの購入</div>
-      <div class="task-prereq en-only">⚠️ Prerequisite: Purchase EC meter and pH meter</div>
-    </div>
-  </div>
+  // Near term table
+  const rows = d.near_term.map(n => `
+    <tr>
+      <td>${esc(n['action_'+l])}</td>
+      <td>${esc(n['deadline_'+l])}</td>
+      <td>${esc(n['cost_'+l])}</td>
+    </tr>`).join('');
+  const [th1,th2,th3] = l==='en'
+    ? ['Action','Target','Cost']
+    : ['アクション','期限の目安','費用'];
 
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">🟠 短期で取り組む課題</span>
-      <span class="en-only">🟠 Short-Term Tasks</span>
+  document.getElementById('content-tab1').innerHTML = `
+    <div class="focus-card">
+      <div class="focus-label">🎯 ${l==='en'?"Manager's Current Focus / "+t(d.focus,'period'):"山岸の今の関心事 / "+t(d.focus,'period')}</div>
+      <div class="focus-text">${esc(t(d.focus,'summary'))}</div>
+      <div class="focus-items">${items}</div>
     </div>
+    <div class="section-label">${l==='en'?'Recent Changes':'最近の変化・出来事'}</div>
+    <div class="card">${changes}</div>
+    <div class="section-label">${l==='en'?'Current Problems':'今抱えている課題'}</div>
+    <div class="card">${issues}</div>
+    <div class="section-label">${l==='en'?'Near-Term Actions':'近々に解決すべきアクション'}</div>
+    <div class="card">
+      <table class="data-table">
+        <tr><th>${th1}</th><th>${th2}</th><th>${th3}</th></tr>
+        ${rows}
+      </table>
+    </div>`;
+}
 
-    <div class="task-item">
-      <div class="task-head"><span class="badge b-orange"><span class="jp-only">重要</span><span class="en-only">Important</span></span>
-        <span class="task-title jp-only">豆苗：ロットごとの記録開始</span>
-        <span class="task-title en-only">Pea shoots: start batch logging</span>
-      </div>
-      <div class="task-detail jp-only">根腐れの原因が特定できない最大の理由は「記録がないこと」。播種日・発芽室の様子・根腐れ発生率・変更した条件を毎ロット記録する。</div>
-      <div class="task-detail en-only">The main barrier to diagnosing root rot is the lack of records. Log every batch: sowing date, germination room conditions, root rot rate, any changes made.</div>
-    </div>
+// ── TAB 2: 年間スケジュール ───────────────────────────
+function renderTab2() {
+  const d = D.tab2;
+  const l = L();
+  const currentMonth = new Date().getMonth() + 1;
+  const heroMonth = d.hero.month;
 
-    <div class="task-item">
-      <div class="task-head"><span class="badge b-orange"><span class="jp-only">重要</span><span class="en-only">Important</span></span>
-        <span class="task-title jp-only">夏の冷却対策を計画する（6月までに）</span>
-        <span class="task-title en-only">Plan summer cooling (before June)</span>
-      </div>
-      <div class="task-detail jp-only">ハウスが40〜50℃になるとブロッコリーが栽培限界を超える。遮光ネット・ミスト冷却の導入を夏前に計画する。</div>
-      <div class="task-detail en-only">Broccoli reaches its growth limit above 40–50°C. Plan shade netting or mist cooling installation before summer. The farm's abundant 15°C well water is a low-cost cooling resource.</div>
-    </div>
-  </div>
+  // Hero tasks
+  const prioLabel = {now:{jp:'今すぐ',en:'Now'},plan:{jp:'今月中',en:'This month'},prep:{jp:'準備',en:'Prep'}};
+  const heroTasks = d.hero.tasks.map(t2 => `
+    <div class="month-task">
+      <span class="month-task-prio prio-${t2.priority}">${prioLabel[t2.priority]?.[l] ?? t2.priority}</span>
+      <div class="month-task-text">${esc(t2[l])}</div>
+    </div>`).join('');
 
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">📊 農場の現状サマリー</span>
-      <span class="en-only">📊 Farm Status Summary</span>
-    </div>
-    <table>
-      <tr>
-        <th class="jp-only">項目</th><th class="jp-only">現状</th>
-        <th class="en-only">Item</th><th class="en-only">Current Status</th>
-      </tr>
-      <tr>
-        <td class="jp-only">品種</td><td class="jp-only">かいわれ大根 ／ ブロッコリースプラウト ／ 豆苗</td>
-        <td class="en-only">Varieties</td><td class="en-only">Daikon sprouts / Broccoli sprouts / Pea shoots</td>
-      </tr>
-      <tr>
-        <td class="jp-only">現在のEC</td><td class="jp-only">2.0 mS/cm（見直し中）</td>
-        <td class="en-only">Current EC</td><td class="en-only">2.0 mS/cm (under review)</td>
-      </tr>
-      <tr>
-        <td class="jp-only">水源</td><td class="jp-only">井戸水（約15℃、年間ほぼ一定）</td>
-        <td class="en-only">Water source</td><td class="en-only">Well water (~15°C, stable year-round)</td>
-      </tr>
-      <tr>
-        <td class="jp-only">発芽室温度</td><td class="jp-only">20℃（年間固定）</td>
-        <td class="en-only">Germination room</td><td class="en-only">20°C (fixed year-round)</td>
-      </tr>
-      <tr>
-        <td class="jp-only">予冷温度</td><td class="jp-only">5℃</td>
-        <td class="en-only">Pre-cooling temp</td><td class="en-only">5°C</td>
-      </tr>
-    </table>
-  </div>
-</div>
+  // Annual grid — order from hero+1 to hero-1 (wrapping), skip hero month
+  const order = [];
+  for (let i = 1; i <= 12; i++) {
+    const m = ((heroMonth - 1 + i) % 12) + 1;
+    if (m !== heroMonth) order.push(m);
+  }
 
-<!-- ===== PHILOSOPHY ===== -->
-<div class="section content" id="tab-philosophy">
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">🧭 農場のプライオリティ</span>
-      <span class="en-only">🧭 Farm Priorities</span>
-    </div>
-    <p class="jp-only">スプラウト農場を正しく経営するために、すべての判断はこの順番で行う。</p>
-    <p class="en-only">All decisions at this farm are made in the following order of priority.</p>
-    <div class="pri-item">
-      <div class="pri-num">1</div>
-      <div class="pri-body">
-        <strong class="jp-only">確実な出荷（欠品ゼロ）</strong>
-        <strong class="en-only">Fulfill every order — zero stockouts</strong>
-        <span class="jp-only">注文が来た日に必ず出荷できること。欠品は即座に信頼を失い、取引停止につながる。これが農場の存在価値そのもの。</span>
-        <span class="en-only">Ship on the same day an order arrives. A single stockout causes immediate loss of trust and risks contract termination. This is the farm's core value proposition.</span>
-      </div>
-    </div>
-    <div class="pri-item">
-      <div class="pri-num">2</div>
-      <div class="pri-body">
-        <strong class="jp-only">品質の安定</strong>
-        <strong class="en-only">Consistent quality</strong>
-        <span class="jp-only">毎回同じ品質を届けること。ばらつきはクレームと返品につながる。長さ・色・鮮度を一定に保つ。</span>
-        <span class="en-only">Deliver the same quality every time. Variation leads to complaints and returns. Control length, color, and freshness consistently.</span>
-      </div>
-    </div>
-    <div class="pri-item">
-      <div class="pri-num">3</div>
-      <div class="pri-body">
-        <strong class="jp-only">コストを低く保つ</strong>
-        <strong class="en-only">Keep costs low</strong>
-        <span class="jp-only">資材・種・パックを無駄にしない。人の時間を有効に使う。ただし1位・2位を損なわない範囲で追求する。</span>
-        <span class="en-only">Avoid waste in materials, seeds, and packaging. Use staff time efficiently. Pursue this only without compromising priorities 1 and 2.</span>
-      </div>
-    </div>
-  </div>
+  // Split into this year / next year
+  const thisYear = [], nextYear = [];
+  let crossed = false;
+  order.forEach(m => {
+    if (m < heroMonth && !crossed) { crossed = true; }
+    if (crossed) nextYear.push(m); else thisYear.push(m);
+  });
 
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">📈 スプラウト市場の特性</span>
-      <span class="en-only">📈 Sprout Market Structure</span>
-    </div>
-    <p class="jp-only">スプラウトは農家と呼ばれるが、実態は半分が工業製品に近い。天候・季節に左右されない工業的な生産が可能なため、価格は需給で変動しない。</p>
-    <p class="en-only">Sprout farming is semi-industrial in nature. Because production is independent of weather and seasons, prices do not fluctuate with supply and demand — unlike conventional field vegetables.</p>
-    <table>
-      <tr>
-        <th></th>
-        <th class="jp-only">路地野菜</th><th class="jp-only">スプラウト</th>
-        <th class="en-only">Field Vegetables</th><th class="en-only">Sprouts</th>
-      </tr>
-      <tr>
-        <td class="jp-only">価格変動</td><td class="jp-only">豊作・不作で大きく変動</td><td class="jp-only">ほぼ固定価格</td>
-        <td class="en-only">Price</td><td class="en-only">Fluctuates heavily</td><td class="en-only">Virtually fixed</td>
-      </tr>
-      <tr>
-        <td class="jp-only">市場での強み</td><td class="jp-only">価格競争力</td><td class="jp-only">常に棚を埋められる安定供給力</td>
-        <td class="en-only">Market strength</td><td class="en-only">Price competitiveness</td><td class="en-only">Reliable, year-round availability</td>
-      </tr>
-      <tr>
-        <td class="jp-only">市場での弱み</td><td class="jp-only">高値期は売れない</td><td class="jp-only">路地野菜が安い時期はほとんど売れない</td>
-        <td class="en-only">Market weakness</td><td class="en-only">Expensive in off-seasons</td><td class="en-only">Barely sells when field veg is cheap</td>
-      </tr>
-    </table>
-    <div class="warn">
-      <span class="jp-only">⚠️ かいわれ100円 vs 小松菜・レタス98円という状況では価格では勝てない。スプラウトの価値は「いつでも確実に来ること」にある。</span>
-      <span class="en-only">⚠️ Daikon sprouts at ¥100 vs. komatsuna or lettuce at ¥98 (with far more volume) — price competition is unwinnable. The farm's value is the guarantee of always showing up.</span>
-    </div>
-  </div>
-
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">🏪 スーパーにとってのスプラウトの役割</span>
-      <span class="en-only">🏪 Why Supermarkets Stock Sprouts</span>
-    </div>
-    <p class="jp-only">スーパーがスプラウトを仕入れる本質的な理由はリスクヘッジ。路地野菜が入らないとき、野菜コーナーが空にならないようにスプラウトで棚を埋める役割を担っている。野菜が豊作・安値のときは、スプラウトは棚でほとんど動かず廃棄されている可能性が高い。だからこそ「欠品しない農場」であり続けることが契約を守る唯一の武器になる。</p>
-    <p class="en-only">Supermarkets stock sprouts primarily as a hedge against produce shortages. When field vegetables are unavailable, sprouts fill shelf space. When vegetables are abundant and cheap, sprouts barely sell and are likely discarded. This means the farm's competitive advantage is not price — it is the guarantee of always delivering.</p>
-  </div>
-</div>
-
-<!-- ===== PROCESS ===== -->
-<div class="section content" id="tab-process">
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">⏱ 仕込みから出荷までの流れ</span>
-      <span class="en-only">⏱ Day-by-Day: Sowing to Shipping</span>
-    </div>
-    <div class="timeline">
-      <div class="tl-item">
-        <div class="tl-day jp-only">Day 0（仕込み・浸種）</div>
-        <div class="tl-day en-only">Day 0 — Preparation / Seed Soaking (<span class="jword" data-jp="浸種" data-kana="しんしゅ" data-meaning="Soaking seeds in water before sowing">浸種</span>)</div>
-        <div class="tl-text jp-only">07:00 種を水に浸す → 15:00 水から上げる → 暗室で就寝</div>
-        <div class="tl-text en-only">07:00 soak seeds in water → 15:00 remove from water → rest in dark room overnight</div>
-        <div class="tl-text" style="margin-top:5px">
-          <span class="jp-only">⚠️ かいわれ浸種温度：<strong>25℃</strong> ／ ブロッコリー：<strong>20℃以下</strong>（厳守）</span>
-          <span class="en-only">⚠️ Daikon soaking temp: <strong>25°C</strong> / Broccoli: <strong>20°C or below</strong> — strictly enforced</span>
+  function monthCard(m) {
+    const info = d.annual[String(m)];
+    if (!info) return '';
+    const isCurrent = m === currentMonth;
+    const cls = [
+      'month-card',
+      isCurrent ? 'current' : '',
+      info.season === 'summer' ? 'summer' : '',
+      info.season === 'winter' ? 'winter' : ''
+    ].filter(Boolean).join(' ');
+    const badge = isCurrent
+      ? `<span class="current-marker">${l==='en'?'NOW':'今月'}</span>`
+      : seasonBadge(info.season, info['label_'+l]);
+    const tasks = (info['tasks_'+l] || []).map(t2 => `<li>${esc(t2)}</li>`).join('');
+    const mName = l==='en'
+      ? ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'][m-1]
+      : m+'月';
+    return `
+      <div class="${cls}">
+        <div class="month-card-head">
+          <div><div class="month-num">${m}</div><div class="month-name-small">${mName}</div></div>
+          ${badge}
         </div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">Day 1（種まき・播種）</div>
-        <div class="tl-day en-only">Day 1 — Sowing (<span class="jword" data-jp="播種" data-kana="はしゅ" data-meaning="Sowing seeds onto growing trays">播種</span>)</div>
-        <div class="tl-text jp-only">08:00 種まき → 発芽室へ（遮光）。1日2回かん水（肥料なし、井戸水15℃）</div>
-        <div class="tl-text en-only">08:00 sow seeds → move to germination room (light-blocked). Water 2× daily with well water (no fertilizer, ~15°C)</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">Day 2</div>
-        <div class="tl-day en-only">Day 2</div>
-        <div class="tl-text jp-only">かん水継続。発芽の進み具合を確認。</div>
-        <div class="tl-text en-only">Continue watering. Check germination progress.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">Day 3（かいわれ・ブロッコリー → ハウスへ展開）</div>
-        <div class="tl-day en-only">Day 3 — Daikon &amp; Broccoli → Transfer to Greenhouse (<span class="jword" data-jp="展開" data-kana="てんかい" data-meaning="Moving trays from germination room to greenhouse">展開</span>)</div>
-        <div class="tl-text jp-only">07:00 根がトレー底から少し出ていたらガラスハウスへ。目視確認が基本。</div>
-        <div class="tl-text en-only">07:00 — when roots are just visible through the tray bottom, transfer to glass greenhouse. Always confirm visually.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">Day 4（豆苗 → ハウスへ展開）</div>
-        <div class="tl-day en-only">Day 4 — Pea Shoots → Transfer to Greenhouse</div>
-        <div class="tl-text jp-only">07:00 目視確認後ガラスハウスへ展開。</div>
-        <div class="tl-text en-only">07:00 — confirm visually, then transfer to glass greenhouse.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">Day 5〜（ハウス管理・収穫まで）</div>
-        <div class="tl-day en-only">Day 5+ — Greenhouse Management Until Harvest</div>
-        <div class="tl-text jp-only">品種・季節によってハウス滞在日数が変わる（下の表参照）。長さをこまめに確認。</div>
-        <div class="tl-text en-only">Greenhouse days vary by variety and season (see table below). Check length frequently.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">収穫日 → 予冷（5℃）</div>
-        <div class="tl-day en-only">Harvest Day → Pre-cooling (<span class="jword" data-jp="予冷" data-kana="よれい" data-meaning="Pre-cooling harvested sprouts in 5°C refrigerator to slow growth and reduce bacteria">予冷</span>) at 5°C</div>
-        <div class="tl-text jp-only">ハウスから上げた後、梱包前日に5℃冷蔵庫で予冷。成長を止め、菌の繁殖を抑制。</div>
-        <div class="tl-text en-only">After removing from greenhouse, pre-cool in 5°C refrigerator the day before packing. Slows growth and reduces bacterial activity.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">梱包日（予冷翌日）→ 出荷</div>
-        <div class="tl-day en-only">Packing Day (day after pre-cooling) → Shipping</div>
-        <div class="tl-text jp-only">梱包 → 当日〜翌日出荷。<strong>梱包日から最大2日以内</strong>に出荷。</div>
-        <div class="tl-text en-only">Pack → ship same day or next day. <strong>Must ship within 2 days of packing.</strong></div>
-      </div>
-    </div>
-  </div>
+        <ul class="month-tasks-small">${tasks}</ul>
+      </div>`;
+  }
 
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">📅 品種別・季節別 ハウス滞在日数</span>
-      <span class="en-only">📅 Greenhouse Days by Variety &amp; Season</span>
+  const yr = new Date().getFullYear();
+  const gridThis = thisYear.map(monthCard).join('');
+  const gridNext = nextYear.map(monthCard).join('');
+  const nextLabel = l==='en' ? `Next Year (${yr+1})` : `来年（${yr+1}年）`;
+  const annualLabel = l==='en' ? `Full Year Schedule ${yr}` : `年間スケジュール（${yr}年）`;
+
+  document.getElementById('content-tab2').innerHTML = `
+    <div class="month-hero">
+      <div class="month-hero-label">${l==='en'?"THIS MONTH'S FOCUS":"今月のタスク"}</div>
+      <div class="month-hero-title">${esc(d.hero['title_'+l])}</div>
+      <div class="month-hero-season">${esc(d.hero['subtitle_'+l])}</div>
+      <div class="month-task-list">${heroTasks}</div>
     </div>
-    <table>
+    <div class="year-divider"><span class="year-divider-label">${annualLabel}</span></div>
+    <div class="year-grid">${gridThis}</div>
+    ${nextYear.length ? `
+      <div class="year-divider" style="margin-top:24px"><span class="year-divider-label">${nextLabel}</span></div>
+      <div class="year-grid">${gridNext}</div>` : ''}`;
+}
+
+// ── TAB 3: ビジョン ────────────────────────────────────
+function renderTab3() {
+  const d = D.tab3;
+  const l = L();
+
+  const visionHtml = d['vision_'+l]
+    ? `<div class="card"><p style="font-size:14px;line-height:1.7">${esc(d['vision_'+l])}</p></div>`
+    : `<div class="vision-placeholder">
+        <div class="vision-placeholder-icon">🌱</div>
+        <div class="vision-placeholder-text">${l==='en'
+          ? "NOSON's long-term vision will be captured here.<br>This is where we put into words what a 40-year-old farm stands for."
+          : "ノーサンが目指す姿・存在意義をここに書いていきます。<br>山岸さんと一緒に「40年続く農場として次に何を残すか」を言語化していく場所です。"}</div>
+      </div>`;
+
+  const priorities = d.priorities.map(p => `
+    <div class="priority-item">
+      <div class="priority-num">${p.num}</div>
+      <div class="priority-body">
+        <div class="priority-title">${esc(p['title_'+l])}</div>
+        <div class="priority-desc">${esc(p['desc_'+l])}</div>
+      </div>
+    </div>`).join('');
+
+  const goalsHtml = d.goals && d.goals.length
+    ? d.goals.map(g => `<div class="card"><p style="font-size:13px;line-height:1.7">${esc(g[l])}</p></div>`).join('')
+    : `<div class="vision-placeholder">
+        <div class="vision-placeholder-icon">🎯</div>
+        <div class="vision-placeholder-text">${l==='en'
+          ? 'Mid/long-term goals will be added here as they are shaped.'
+          : '中長期目標をここに蓄積していきます。'}</div>
+      </div>`;
+
+  document.getElementById('content-tab3').innerHTML = `
+    <div class="section-label">${l==='en'?'Company Vision':'会社のビジョン'}</div>
+    ${visionHtml}
+    <div class="section-label">${l==='en'?'Farm Priorities':'農場のプライオリティ'}</div>
+    <div class="card">${priorities}</div>
+    <div class="section-label">${l==='en'?'Understanding the Sprout Market':'スプラウト市場を理解する'}</div>
+    <div class="card">
+      <div class="card-title">${l==='en'?'📈 Why Supermarkets Need Sprouts':'📈 スーパーにとってスプラウトが必要な本当の理由'}</div>
+      <p style="font-size:13px;color:var(--text-muted);line-height:1.7">${esc(d['market_insight_'+l])}</p>
+      <div class="warn-box">${esc(d['market_warn_'+l])}</div>
+    </div>
+    <div class="section-label">${l==='en'?'Mid-to-Long Term Goals':'中長期目標'}</div>
+    ${goalsHtml}`;
+}
+
+// ── TAB 4: 品種別ケア ──────────────────────────────────
+function renderTab4() {
+  const d = D.tab4;
+  const l = L();
+
+  function riskBadgeClass(type) {
+    return {red:'badge-red',amber:'badge-amber',blue:'badge-blue',gray:'badge-gray'}[type]??'badge-gray';
+  }
+
+  function buildVariety(key) {
+    const v = d[key];
+    if (!v) return '';
+    const profileRows = v.profile.map(p => `
       <tr>
-        <th class="jp-only">品種</th><th class="jp-only">夏（最暑期）</th><th class="jp-only">春・秋</th><th class="jp-only">冬（最寒期）</th>
-        <th class="en-only">Variety</th><th class="en-only">Summer (peak heat)</th><th class="en-only">Spring/Fall</th><th class="en-only">Winter (coldest)</th>
-      </tr>
-      <tr>
-        <td class="jp-only">かいわれ大根</td><td>2日</td><td>2〜3日</td><td>4日</td>
-        <td class="en-only">Daikon sprouts</td><td class="en-only">2 days</td><td class="en-only">2–3 days</td><td class="en-only">4 days</td>
-      </tr>
-      <tr>
-        <td class="jp-only">ブロッコリースプラウト</td><td>約2.5日</td><td>3〜4日</td><td>約4.5日</td>
-        <td class="en-only">Broccoli sprouts</td><td class="en-only">~2.5 days</td><td class="en-only">3–4 days</td><td class="en-only">~4.5 days</td>
-      </tr>
-      <tr>
-        <td class="jp-only">豆苗</td><td>4日（最短）</td><td>4〜8日</td><td>12日（10℃設定）</td>
-        <td class="en-only">Pea shoots</td><td class="en-only">4 days (min)</td><td class="en-only">4–8 days</td><td class="en-only">12 days (at 10°C)</td>
-      </tr>
-    </table>
-  </div>
+        <td>${esc(p['item_'+l])}</td>
+        <td>${p.strong ? `<strong>${esc(p['val_'+l])}</strong>` : esc(p['val_'+l])}</td>
+      </tr>`).join('');
 
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">📏 長さ管理：収穫タイミングの判断</span>
-      <span class="en-only">📏 Length Control &amp; Harvest Timing</span>
-    </div>
-    <p class="jp-only">スプラウトは規格の範囲内（長すぎず・短すぎず）での出荷が必須。数時間で数センチ伸びる。梱包後もお客さんに届くまで成長が続く。「今ちょうどいい長さ」で梱包すると、届いたときに長すぎになる。届いたときにベストな長さになるよう、<strong>少し短めで収穫・梱包する</strong>判断が必要。</p>
-    <p class="en-only">Sprouts must ship within strict length specifications. They grow several centimeters within hours, and growth continues after packing until delivery. Packing at "perfect" length means they will be too long on arrival. <strong>Always pack slightly short</strong> so the product arrives at the right length.</p>
-    <div class="danger">
-      <span class="jp-only"><strong>⚠️ 最難関判断：夕方15時「少し短い」状態</strong><br>翌朝まで待つと長すぎる → 上げると短すぎる可能性。その日の温度・成長速度から判断する。</span>
-      <span class="en-only"><strong>⚠️ Hardest call: "slightly short" at 15:00</strong><br>Last employee leaves at 15:00. Waiting until morning → too long. Harvesting now → might be too short. Judge based on today's temperature and growth rate.</span>
-    </div>
-    <p class="jp-only" style="margin-top:8px">精度を上げるために：「何℃のとき、何時間で何センチ伸びたか」を記録する習慣をつける。</p>
-    <p class="en-only" style="margin-top:8px">To build better judgment over time: record "at X°C, grew Y cm in Z hours."</p>
-  </div>
-</div>
+    const risks = v.risks ? v.risks.map(r => `
+      <div class="issue-item">
+        <div class="issue-head">
+          <span class="badge ${riskBadgeClass(r.type)}">${esc(r['label_'+l])}</span>
+          <div class="issue-title">${esc(r['title_'+l])}</div>
+        </div>
+        <div class="issue-body">${esc(r['body_'+l])}</div>
+      </div>`).join('') : '';
 
-<!-- ===== VARIETY ===== -->
-<div class="section content" id="tab-variety">
-  <div class="card" style="padding-bottom:8px">
-    <div class="variety-nav">
-      <div class="v-btn active" onclick="showVariety('kaiwari')">
-        <span class="jp-only">かいわれ</span><span class="en-only">Daikon</span>
-      </div>
-      <div class="v-btn" onclick="showVariety('broccoli')">
-        <span class="jp-only">ブロッコリー</span><span class="en-only">Broccoli</span>
-      </div>
-      <div class="v-btn" onclick="showVariety('mame')">
-        <span class="jp-only">豆苗</span><span class="en-only">Pea Shoots</span>
-      </div>
-    </div>
+    let rootRotHtml = '';
+    if (v.root_rot) {
+      const rr = v.root_rot;
+      const colorMap = {green:'var(--green-mid)',amber:'var(--amber)',red:'var(--red)'};
+      const stageRows = rr.stages.map(s => `
+        <tr>
+          <td style="color:${colorMap[s.color]};font-weight:700">${esc(s['stage_'+l])}</td>
+          <td>${esc(s['desc_'+l])}</td>
+        </tr>`).join('');
+      const causes = rr.causes.map((c,i) => `
+        <div class="issue-item" ${i===rr.causes.length-1?'style="border-bottom:none;padding-bottom:0"':''}>
+          <div class="issue-body">① ${esc(c[l])}</div>
+        </div>`).join('').replace(/①/g, (_,i2)=>['①','②','③'][Math.floor(i2/160)]||'・');
 
-    <!-- かいわれ -->
-    <div class="variety-block active" id="v-kaiwari">
-      <h3 class="jp-only">🌱 かいわれ大根</h3>
-      <h3 class="en-only">🌱 Daikon Radish Sprouts (<span class="jword" data-jp="かいわれ大根" data-kana="かいわれだいこん" data-meaning="Daikon radish sprouts — the most common variety grown here">かいわれ大根</span>)</h3>
-      <table>
-        <tr>
-          <th class="jp-only">項目</th><th class="jp-only">内容</th>
-          <th class="en-only">Item</th><th class="en-only">Details</th>
-        </tr>
-        <tr>
-          <td class="jp-only">浸種温度</td><td class="jp-only"><strong>25℃</strong> 目標</td>
-          <td class="en-only">Soaking temp</td><td class="en-only"><strong>25°C</strong> target</td>
-        </tr>
-        <tr>
-          <td class="jp-only">発芽室</td><td class="jp-only">20℃（年間固定）</td>
-          <td class="en-only">Germination room</td><td class="en-only">20°C (year-round)</td>
-        </tr>
-        <tr>
-          <td class="jp-only">展開タイミング</td><td class="jp-only">Day 3 朝。根がトレー底から少し出たら</td>
-          <td class="en-only">Transfer timing</td><td class="en-only">Day 3 morning. Roots just visible through tray bottom.</td>
-        </tr>
-        <tr>
-          <td class="jp-only">環境適応性</td><td class="jp-only">3品種の中で最も高い。安定して育てやすい</td>
-          <td class="en-only">Adaptability</td><td class="en-only">Highest among the 3 varieties. Most stable to grow.</td>
-        </tr>
-      </table>
-      <div class="warn" style="margin-top:10px">
-        <strong class="jp-only">⚠️ 黄色い発芽・発芽ムラが混ざる</strong>
-        <strong class="en-only">⚠️ Yellow or unevenly germinated plants mixed into product</strong>
-        <br>
-        <span class="jp-only">原因：浸種温度が不安定 → 発芽率にばらつき。対応：浸種温度を25℃に安定させる。発芽室の実測温度を確認する。</span>
-        <span class="en-only">Cause: Unstable soaking temperature → uneven germination. Fix: stabilize soaking at 25°C. Verify actual germination room temperature (may differ from set point).</span>
-      </div>
-    </div>
+      // Re-do cause numbering properly
+      const causeHtml = rr.causes.map((c,i) => `
+        <div class="issue-item" style="${i===rr.causes.length-1?'border-bottom:none;padding-bottom:0':''}">
+          <div class="issue-body">${['①','②','③'][i]} ${esc(c[l])}</div>
+        </div>`).join('');
 
-    <!-- ブロッコリー -->
-    <div class="variety-block" id="v-broccoli">
-      <h3 class="jp-only">💚 ブロッコリースプラウト</h3>
-      <h3 class="en-only">💚 Broccoli Sprouts (<span class="jword" data-jp="ブロッコリースプラウト" data-kana="ぶろっこりーすぷらうと" data-meaning="Broccoli sprouts — most temperature-sensitive variety, naturally cold-tolerant">ブロッコリースプラウト</span>)</h3>
-      <table>
-        <tr>
-          <th class="jp-only">項目</th><th class="jp-only">内容</th>
-          <th class="en-only">Item</th><th class="en-only">Details</th>
-        </tr>
-        <tr>
-          <td class="jp-only">浸種温度</td><td class="jp-only"><strong>20℃以下</strong>（超えると腐敗リスク）</td>
-          <td class="en-only">Soaking temp</td><td class="en-only"><strong>20°C or below</strong> — exceeding this causes rot</td>
-        </tr>
-        <tr>
-          <td class="jp-only">温度感受性</td><td class="jp-only">3品種の中で最もデリケート</td>
-          <td class="en-only">Heat sensitivity</td><td class="en-only">Most delicate of the 3 varieties</td>
-        </tr>
-        <tr>
-          <td class="jp-only">低温適性</td><td class="jp-only">本来は寒さに強い性質</td>
-          <td class="en-only">Cold tolerance</td><td class="en-only">Naturally cold-tolerant species</td>
-        </tr>
-      </table>
-      <div class="danger" style="margin-top:10px">
-        <strong class="jp-only">🚫 浸種温度30℃以上は絶対禁止</strong>
-        <strong class="en-only">🚫 Soaking temperature above 30°C — strictly prohibited</strong>
-        <br>
-        <span class="jp-only">過去に30℃で浸種した結果、発芽室で腐敗・悪臭が発生。本来寒さに強い品種なので高温浸種は厳禁。</span>
-        <span class="en-only">Confirmed incident: soaking at ~30°C caused seeds to become oxygen-deprived, resulting in complete batch rot with foul odor in the germination room. Despite being cold-tolerant, high soaking temperatures are strictly prohibited.</span>
-      </div>
-      <div class="warn" style="margin-top:6px">
-        <strong class="jp-only">⚠️ 夏40〜50℃：葉が開かず「ツンツン」になる</strong>
-        <strong class="en-only">⚠️ Summer 40–50°C: leaves fail to open ("spiked" stage — <span class="jword" data-jp="ツンツン" data-kana="つんつん" data-meaning="Describes sprouts where leaves fail to unfurl due to heat stress — only stems grow straight up">ツンツン</span>)</strong>
-        <br>
-        <span class="jp-only">前年夏に確認済み。栽培の限界。根本解決は冷却設備の導入。</span>
-        <span class="en-only">Confirmed in summer 2024. Reaches the absolute limit of cultivation. Root cause: no cooling equipment. Must be resolved before next summer.</span>
-      </div>
-      <div class="info" style="margin-top:6px">
-        <strong class="jp-only">根高（ねだか）症状：</strong>
-        <strong class="en-only">Root heave (<span class="jword" data-jp="根高" data-kana="ねだか" data-meaning="Root heave — roots push up the growing medium, leaving edible stems extremely short">根高</span>): </strong>
-        <span class="jp-only">根が培地を押し上げ、可食部の茎が極端に短くなる。原因調査中。発生時は発芽密度・温度・水分量を記録すること。</span>
-        <span class="en-only">Roots push up the growing medium, leaving edible stems extremely short. Cause under investigation. Log sowing density, temperature, and moisture whenever this occurs.</span>
-      </div>
-    </div>
+      rootRotHtml = `
+        <div class="card" style="border-color:var(--red);border-width:1.5px">
+          <div class="card-title" style="color:var(--red)">🔴 ${l==='en'?'Critical Risk: Root Rot':'最重大リスク：根腐れ（ネグサレ）'}</div>
+          <p style="font-size:13px;color:var(--text-muted);margin-bottom:12px;line-height:1.6">${l==='en'
+            ? `A challenge shared across the entire sprout industry. At worst, our farm saw <strong>80–90% of batches discarded</strong>.`
+            : `スプラウト業界全体が共通して悩む難題。当農場でも最悪期に<strong>8〜9割が廃棄</strong>となった実績がある。`}</p>
+          <div style="font-size:12px;font-weight:700;color:var(--gray);margin-bottom:8px;text-transform:uppercase;letter-spacing:.06em">${l==='en'?'Progression Stages':'進行ステージ'}</div>
+          <table class="data-table" style="margin-bottom:14px">
+            <tr><th>${l==='en'?'Stage':'ステージ'}</th><th>${l==='en'?'Root Condition':'根の状態'}</th></tr>
+            ${stageRows}
+          </table>
+          <div class="warn-box">${esc(rr['warn_'+l])}</div>
+          <div style="font-size:12px;font-weight:700;color:var(--gray);margin:14px 0 8px;text-transform:uppercase;letter-spacing:.06em">${l==='en'?'Industry-Shared Suspected Causes':'業界で共有されている推定原因'}</div>
+          ${causeHtml}
+          <div class="info-box" style="margin-top:12px">📋 ${esc(rr['action_'+l])}</div>
+        </div>`;
+    }
 
-    <!-- 豆苗 -->
-    <div class="variety-block" id="v-mame">
-      <h3 class="jp-only">🟢 豆苗</h3>
-      <h3 class="en-only">🟢 Pea Shoots (<span class="jword" data-jp="豆苗" data-kana="とうみょう" data-meaning="Pea shoots — grown from pea seeds, longest growing cycle, prone to root rot">豆苗</span>)</h3>
-      <table>
-        <tr>
-          <th class="jp-only">項目</th><th class="jp-only">内容</th>
-          <th class="en-only">Item</th><th class="en-only">Details</th>
-        </tr>
-        <tr>
-          <td class="jp-only">展開タイミング</td><td class="jp-only">Day 4 朝</td>
-          <td class="en-only">Transfer timing</td><td class="en-only">Day 4 morning</td>
-        </tr>
-        <tr>
-          <td class="jp-only">ハウス滞在</td><td class="jp-only">夏4日（最短）／ 冬12日（10℃設定）</td>
-          <td class="en-only">Greenhouse days</td><td class="en-only">Summer: 4 days (min) / Winter: 12 days (at 10°C)</td>
-        </tr>
-        <tr>
-          <td class="jp-only">冬の戦略</td><td class="jp-only">最小暖房（10℃）で低温・長期栽培→暖房費節約</td>
-          <td class="en-only">Winter strategy</td><td class="en-only">Minimum heating (10°C) for slow, low-cost long-cycle growth</td>
-        </tr>
-        <tr>
-          <td class="jp-only">肥料</td><td class="jp-only">水のみ（無肥料）で試験推奨</td>
-          <td class="en-only">Fertilizer</td><td class="en-only">Water only (no fertilizer) — recommended trial</td>
-        </tr>
-      </table>
-      <div class="danger" style="margin-top:10px">
-        <strong class="jp-only">⚠️ 最大の問題：根腐れ（ネグサレ）</strong>
-        <strong class="en-only">⚠️ Critical issue: Root rot (<span class="jword" data-jp="根腐れ" data-kana="ねぐされ / ネグサレ" data-meaning="Root rot — the most serious problem with pea shoots. White healthy roots turn brown and mushy.">根腐れ / ネグサレ</span>)</strong>
-        <br><br>
-        <table style="margin-top:4px">
-          <tr>
-            <th class="jp-only">段階</th><th class="jp-only">症状</th>
-            <th class="en-only">Stage</th><th class="en-only">Symptom</th>
-          </tr>
-          <tr>
-            <td class="jp-only">健康</td><td class="jp-only">真っ白で絹のような根が絡み合う</td>
-            <td class="en-only">Healthy</td><td class="en-only">White, silky roots clustered at tray bottom</td>
-          </tr>
-          <tr>
-            <td class="jp-only">初期</td><td class="jp-only">根の一部が茶色く変色</td>
-            <td class="en-only">Early</td><td class="en-only">Partial browning of roots</td>
-          </tr>
-          <tr>
-            <td class="jp-only">中期</td><td class="jp-only">全体が茶色くドロドロ・特有の匂い</td>
-            <td class="en-only">Middle</td><td class="en-only">Widespread browning, mushy texture, foul odor</td>
-          </tr>
-          <tr>
-            <td class="jp-only">末期</td><td class="jp-only">種が黒くなり成長が止まる</td>
-            <td class="en-only">Late</td><td class="en-only">Seeds turn black, growth stops</td>
-          </tr>
+    return `
+      <div class="card">
+        <div class="card-title">${v.icon} ${esc(v['name_'+l])} — ${l==='en'?'Profile':'基本プロフィール'}</div>
+        <table class="data-table">
+          <tr><th>${l==='en'?'Item':'項目'}</th><th>${l==='en'?'Detail':'内容'}</th></tr>
+          ${profileRows}
         </table>
       </div>
-      <div class="warn" style="margin-top:6px">
-        <span class="jp-only">過去に最悪8〜9割が出荷不可。業界全体の難題。一度発生すると収束が難しい。<br><strong>業界で共有されている原因候補：</strong>①発芽室での乾燥 ②密集＋水不足による種温度上昇 ③菌の蓄積<br><br><strong>最重要：各ロットの状況を記録すること。記録なしに原因は特定できない。</strong></span>
-        <span class="en-only">At worst, 80–90% of batches were unshippable. Industry-wide problem with no definitive solution.<br><strong>Industry-shared suspected causes:</strong> ① Drying out in germination room ② Seed temp rising from dense packing + low water ③ Bacterial buildup<br><br><strong>Most critical action: log every batch. Without records, the cause cannot be identified.</strong></span>
-      </div>
-    </div>
-  </div>
-</div>
+      ${risks ? `<div class="card"><div class="card-title">⚠️ ${l==='en'?'Risks & How to Handle Them':'注意すべきリスクと対処'}</div>${risks}</div>` : ''}
+      ${rootRotHtml}`;
+  }
 
-<!-- ===== FERTILIZER ===== -->
-<div class="section content" id="tab-fertilizer">
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">⚗️ 新しい肥料の混ぜ方（必ず守ること）</span>
-      <span class="en-only">⚗️ New Mixing Procedure — Must Follow</span>
-    </div>
-    <div class="danger">
-      <span class="jp-only">これまでの混ぜ方（同じバケツ）ではリン酸カルシウムの沈殿が発生し、カルシウムとリン酸が失われていた。水槽底の白い沈殿物で現場確認済み。</span>
-      <span class="en-only">Previous method (same bucket) caused calcium phosphate precipitation, depleting Ca and P from the solution. White precipitate on the tank floor has been confirmed on-site.</span>
-    </div>
-    <div class="timeline" style="margin-top:12px">
-      <div class="tl-item">
-        <div class="tl-day jp-only">① ホーグス1号をバケツAで溶かす</div>
-        <div class="tl-day en-only">① Dissolve Hoagus No.1 in Bucket A</div>
-        <div class="tl-text jp-only">水を少し入れたバケツにホーグス1号だけを入れて完全に溶かす。</div>
-        <div class="tl-text en-only">Add a small amount of water to Bucket A. Add Hoagus No.1 only and mix until fully dissolved.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">② 硝酸石灰を別のバケツBで溶かす</div>
-        <div class="tl-day en-only">② Dissolve calcium nitrate (<span class="jword" data-jp="硝酸石灰" data-kana="しょうさんせっかい" data-meaning="Calcium nitrate fertilizer — provides nitrogen and calcium">硝酸石灰</span>) in Bucket B</div>
-        <div class="tl-text jp-only">別のバケツに硝酸石灰だけを入れて溶かす。<strong>絶対に同じバケツに入れない。</strong></div>
-        <div class="tl-text en-only">Use a separate bucket for calcium nitrate only. <strong>Never combine both in the same bucket.</strong></div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">③ 2トン水槽に水を入れる</div>
-        <div class="tl-day en-only">③ Fill 2-ton tank with water first</div>
-        <div class="tl-text jp-only">まず水槽に井戸水を入れる。肥料はまだ入れない。</div>
-        <div class="tl-text en-only">Fill the 2-ton tank with well water. Do not add fertilizer yet.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">④ バケツAを投入・撹拌</div>
-        <div class="tl-day en-only">④ Add Bucket A to tank, stir thoroughly</div>
-        <div class="tl-text jp-only">ホーグス1号溶液を水槽に入れてよくかき混ぜる。</div>
-        <div class="tl-text en-only">Pour Bucket A (Hoagus No.1 solution) into the tank and stir well.</div>
-      </div>
-      <div class="tl-item">
-        <div class="tl-day jp-only">⑤ 少し待ってからバケツBを投入・撹拌</div>
-        <div class="tl-day en-only">⑤ Wait a moment, then add Bucket B, stir thoroughly</div>
-        <div class="tl-text jp-only">硝酸石灰溶液を入れてよくかき混ぜる。薄まった状態で接触するので沈殿が起きない。</div>
-        <div class="tl-text en-only">Pour Bucket B (calcium nitrate solution) and stir well. Both are now diluted before meeting, preventing precipitation.</div>
-      </div>
-    </div>
-  </div>
+  const tabs = [
+    {key:'kaiwari', icon:'🌱', jp:'かいわれ大根', en:'Daikon'},
+    {key:'broccoli',icon:'🥦', jp:'ブロッコリー', en:'Broccoli'},
+    {key:'pea',     icon:'🟢', jp:'豆苗',         en:'Pea Shoots'}
+  ];
 
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">📊 季節別 推奨投入量（2トン水槽・タンクA）</span>
-      <span class="en-only">📊 Seasonal Amounts — Tank A (Daikon + Broccoli), per 2-ton tank</span>
-    </div>
-    <p style="font-size:.78rem;color:#888;margin-bottom:8px">
-      <span class="jp-only">※ 新しい混ぜ方で使用する量。必ずECメーターで確認すること。</span>
-      <span class="en-only">※ For use with the new separate-bucket method. Always verify with EC meter.</span>
+  const navBtns = tabs.map((t2,i) => `
+    <button class="shelf-btn${i===0?' active':''}" onclick="showVariety('${t2.key}')" id="vnav-${t2.key}">
+      ${t2.icon} ${t2[l]}
+    </button>`).join('');
+
+  const sections = tabs.map((t2,i) => `
+    <div class="shelf-section${i===0?' active':''}" id="variety-${t2.key}">
+      ${buildVariety(t2.key)}
+    </div>`).join('');
+
+  document.getElementById('content-tab4').innerHTML = `
+    <div class="shelf-nav">${navBtns}</div>
+    ${sections}`;
+}
+
+// ── TAB 5: アクションルール ───────────────────────────
+function renderTab5() {
+  const d = D.tab5;
+  const l = L();
+
+  const html = d.categories.map(cat => {
+    const rules = cat.rules.map(r => `
+      <div class="rule-card ${r.status}">
+        <div class="rule-head">
+          <span class="rule-id">${r.id}</span>
+          <div class="rule-title">${esc(r['title_'+l])}</div>
+          ${statusBadge(r.status, l)}
+        </div>
+        <div class="rule-why"><strong>${l==='en'?'Why:':'なぜか：'}</strong> ${esc(r['why_'+l])}</div>
+        ${r['action_'+l] ? `<div class="rule-action">${esc(r['action_'+l])}</div>` : ''}
+      </div>`).join('');
+    return `
+      <div class="rule-divider-label">${esc(cat['label_'+l])}</div>
+      ${rules}`;
+  }).join('');
+
+  document.getElementById('content-tab5').innerHTML = `
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:20px;line-height:1.7">
+      ${l==='en'
+        ? 'This is not a procedure manual. It\'s a guide for understanding <strong>why each rule exists</strong> — so you can act as a professional with your own judgment.'
+        : 'これはやり方の手順書ではない。<strong>なぜそのルールが存在するか</strong>を理解し、プロとして自分の判断で動くためのガイドだ。'}
     </p>
-    <div class="season-sel">
-      <div class="s-btn active" onclick="showSeason('spring')"><span class="jp-only">春</span><span class="en-only">Spring</span></div>
-      <div class="s-btn" onclick="showSeason('summer')"><span class="jp-only">夏</span><span class="en-only">Summer</span></div>
-      <div class="s-btn" onclick="showSeason('autumn')"><span class="jp-only">秋</span><span class="en-only">Autumn</span></div>
-      <div class="s-btn" onclick="showSeason('winter')"><span class="jp-only">冬</span><span class="en-only">Winter</span></div>
-    </div>
+    ${html}`;
+}
 
-    <div class="recipe-block active" id="r-spring">
-      <h4 class="jp-only">🌸 春（3〜5月）</h4><h4 class="en-only">🌸 Spring (Mar–May)</h4>
-      <div class="recipe-row"><span class="recipe-label jp-only">ホーグス1号</span><span class="recipe-label en-only">Hoagus No.1</span><span class="recipe-val">2.25 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">硝酸石灰</span><span class="recipe-label en-only">Calcium nitrate</span><span class="recipe-val">1.5 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">目標EC</span><span class="recipe-label en-only">Target EC</span><span class="recipe-val">1.5 mS/cm</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">タンクB（豆苗）</span><span class="recipe-label en-only">Tank B (pea shoots)</span><span class="recipe-val jp-only">水のみ（試験推奨）</span><span class="recipe-val en-only">Water only (trial)</span></div>
-    </div>
-    <div class="recipe-block" id="r-summer">
-      <h4 class="jp-only">☀️ 夏（6〜9月）</h4><h4 class="en-only">☀️ Summer (Jun–Sep)</h4>
-      <div class="recipe-row"><span class="recipe-label jp-only">ホーグス1号</span><span class="recipe-label en-only">Hoagus No.1</span><span class="recipe-val">1.95 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">硝酸石灰</span><span class="recipe-label en-only">Calcium nitrate</span><span class="recipe-val">1.3 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">目標EC</span><span class="recipe-label en-only">Target EC</span><span class="recipe-val">1.3 mS/cm</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">タンクB（豆苗）</span><span class="recipe-label en-only">Tank B (pea shoots)</span><span class="recipe-val jp-only">水のみ</span><span class="recipe-val en-only">Water only</span></div>
-    </div>
-    <div class="recipe-block" id="r-autumn">
-      <h4 class="jp-only">🍂 秋（10〜11月）</h4><h4 class="en-only">🍂 Autumn (Oct–Nov)</h4>
-      <div class="recipe-row"><span class="recipe-label jp-only">ホーグス1号</span><span class="recipe-label en-only">Hoagus No.1</span><span class="recipe-val">2.7 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">硝酸石灰</span><span class="recipe-label en-only">Calcium nitrate</span><span class="recipe-val">1.8 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">目標EC</span><span class="recipe-label en-only">Target EC</span><span class="recipe-val">1.8 mS/cm</span></div>
-    </div>
-    <div class="recipe-block" id="r-winter">
-      <h4 class="jp-only">❄️ 冬（12〜3月）</h4><h4 class="en-only">❄️ Winter (Dec–Mar)</h4>
-      <div class="recipe-row"><span class="recipe-label jp-only">ホーグス1号</span><span class="recipe-label en-only">Hoagus No.1</span><span class="recipe-val">3.0–3.45 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">硝酸石灰</span><span class="recipe-label en-only">Calcium nitrate</span><span class="recipe-val">2.0–2.3 kg</span></div>
-      <div class="recipe-row"><span class="recipe-label jp-only">目標EC</span><span class="recipe-label en-only">Target EC</span><span class="recipe-val">2.0–2.3 mS/cm</span></div>
-    </div>
+// ── TAB 6: 本棚 ──────────────────────────────────────
+function renderTab6() {
+  const d = D.tab6;
+  const l = L();
 
-    <div class="warn" style="margin-top:10px">
-      <span class="jp-only">⚠️ 混ぜ方を変えた直後は同じ量でもECが高く出る可能性がある。必ずECメーターで測りながら少しずつ投入すること。</span>
-      <span class="en-only">⚠️ After switching to the new mixing method, the same amounts may produce higher EC (Ca and P are no longer lost to precipitation). Always add gradually and verify with EC meter.</span>
-    </div>
-  </div>
+  const shelfDefs = [
+    {key:'cultivation', icon:'🌱', jp:'栽培技術', en:'Cultivation'},
+    {key:'market',      icon:'📊', jp:'市場・営業', en:'Market'},
+    {key:'business',    icon:'💼', jp:'経営',      en:'Business'},
+    {key:'challenge',   icon:'🚀', jp:'挑戦・ポテンシャル', en:'Challenge'}
+  ];
 
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">ℹ️ 各成分の役割</span>
-      <span class="en-only">ℹ️ Role of Each Nutrient</span>
-    </div>
-    <table>
-      <tr>
-        <th class="jp-only">成分</th><th class="jp-only">役割</th><th class="jp-only">不足すると</th>
-        <th class="en-only">Nutrient</th><th class="en-only">Role</th><th class="en-only">If deficient</th>
-      </tr>
-      <tr>
-        <td class="jp-only">K カリウム 28%</td><td class="jp-only">茎の強度・食感（コシ）</td><td class="jp-only">茎が細く倒れやすい</td>
-        <td class="en-only">K (Potassium 28%)</td><td class="en-only">Stem strength &amp; texture</td><td class="en-only">Thin, floppy stems</td>
-      </tr>
-      <tr>
-        <td class="jp-only">Ca カルシウム</td><td class="jp-only">細胞壁の強化</td><td class="jp-only">とろけ・チップバーン</td>
-        <td class="en-only">Ca (Calcium)</td><td class="en-only">Cell wall integrity</td><td class="en-only">Softening rot, tip burn</td>
-      </tr>
-      <tr>
-        <td class="jp-only">N 窒素</td><td class="jp-only">葉の緑・生育量</td><td class="jp-only">全体的な黄化</td>
-        <td class="en-only">N (Nitrogen)</td><td class="en-only">Leaf color, volume</td><td class="en-only">Overall yellowing</td>
-      </tr>
-      <tr>
-        <td class="jp-only">P リン酸</td><td class="jp-only">根の発達・代謝</td><td class="jp-only">根の発達不良</td>
-        <td class="en-only">P (Phosphate)</td><td class="en-only">Root development</td><td class="en-only">Poor root growth</td>
-      </tr>
-    </table>
-  </div>
-</div>
+  const emptyMsg = {
+    cultivation:{jp:'栽培に関する発見・研究・経験則などを追加していきます。',en:'Add cultivation discoveries, research, and practical insights.'},
+    market:     {jp:'市場・販売・バイヤー目線の知識をここに蓄積。',en:'Market intelligence, buyer perspectives, and sales insights.'},
+    business:   {jp:'農場経営・コスト・人材・設備投資の知見をここに蓄積。',en:'Farm management, cost control, team building, investment decisions.'},
+    challenge:  {jp:'「自分たちにはできる」という根拠を集める棚。',en:'Evidence that we can do more. Challenges taken on, sources of inspiration.'}
+  };
 
-<!-- ===== SYMPTOMS ===== -->
-<div class="section content" id="tab-symptoms">
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">🔍 症状から原因・対応を調べる</span>
-      <span class="en-only">🔍 Symptom Checker — Tap to expand</span>
-    </div>
-
-    <div class="symptom-item" onclick="toggleSymptom(this)">
-      <div class="symptom-q">
-        <span class="jp-only">葉・茎が黄色い、発芽が不揃い</span>
-        <span class="en-only">Yellow color / uneven germination</span>
-      </div>
-      <div class="symptom-ans">
-        <span class="jp-only"><strong>推定原因：</strong>浸種温度が不安定 → 発芽率にばらつき。<br>品種：かいわれで多く見られる。</span>
-        <span class="en-only"><strong>Likely cause:</strong> Unstable soaking temperature → uneven germination. Most common in daikon sprouts.</span>
-        <br>
-        <div class="symptom-action">
-          <span class="jp-only">✅ 浸種温度をかいわれ25℃、ブロッコリー20℃以下に安定させる。発芽室の実測温度を確認する。</span>
-          <span class="en-only">✅ Stabilize soaking temp: daikon 25°C, broccoli 20°C or below. Verify actual temperature inside germination room.</span>
+  function buildShelf(key) {
+    const items = d[key] || [];
+    if (!items.length) return `
+      <div class="shelf-empty">
+        <div class="shelf-empty-icon">${shelfDefs.find(s=>s.key===key)?.icon||'📖'}</div>
+        <div class="shelf-empty-text">${emptyMsg[key]?.[l]||''}</div>
+      </div>`;
+    return items.map(item => `
+      <div class="book-card">
+        <div class="book-icon">${item.icon||'📖'}</div>
+        <div class="book-body">
+          <div class="book-title">${esc(item['title_'+l])}</div>
+          <div class="book-desc">${esc(item['desc_'+l])}</div>
+          <span class="book-tag">${esc(item['tag_'+l])}</span>
         </div>
-      </div>
-    </div>
+      </div>`).join('');
+  }
 
-    <div class="symptom-item" onclick="toggleSymptom(this)">
-      <div class="symptom-q">
-        <span class="jp-only">葉が開かず茎だけ伸びる（ツンツン）</span>
-        <span class="en-only">Leaves fail to open — stems grow straight up ("spiked" stage)</span>
-      </div>
-      <div class="symptom-ans">
-        <span class="jp-only"><strong>推定原因：</strong>ハウスが40〜50℃超の熱ストレス。ブロッコリーで特に発生しやすい。</span>
-        <span class="en-only"><strong>Likely cause:</strong> Greenhouse temperature exceeding 40–50°C. Most common in broccoli sprouts.</span>
-        <br>
-        <div class="symptom-action">
-          <span class="jp-only">✅ 井戸水散水の回数を増やす（気化冷却）。遮光ネットを設置する。根本解決は冷却設備の導入。</span>
-          <span class="en-only">✅ Increase well water irrigation frequency (evaporative cooling). Install shade netting. Long-term: install cooling equipment.</span>
-        </div>
-      </div>
-    </div>
+  const navBtns = shelfDefs.map((s,i) => `
+    <button class="shelf-btn${i===0?' active':''}" onclick="showShelf('shelf-${s.key}')" id="snav-${s.key}">
+      ${s.icon} ${s[l]}
+    </button>`).join('');
 
-    <div class="symptom-item" onclick="toggleSymptom(this)">
-      <div class="symptom-q">
-        <span class="jp-only">茎が軟らかくとろける・葉縁が褐変（チップバーン）</span>
-        <span class="en-only">Soft/rotting stems — tip burn (<span class="jword" data-jp="チップバーン" data-kana="ちっぷばーん" data-meaning="Tip burn — browning and necrosis of leaf margins caused by calcium deficiency">チップバーン</span>) — brown leaf edges</span>
-      </div>
-      <div class="symptom-ans">
-        <span class="jp-only"><strong>推定原因（複合）：</strong>①肥料を同バケツで混ぜてCaが沈殿 ②冬の高湿度でCa蒸散輸送が停止 ③pH 6.5以上でCa吸収が阻害</span>
-        <span class="en-only"><strong>Likely causes (compounding):</strong> ① Calcium lost to precipitation from same-bucket mixing ② High winter humidity stopping Ca transport to shoot tips ③ pH above 6.5 blocking Ca uptake</span>
-        <br>
-        <div class="symptom-action">
-          <span class="jp-only">✅ まず肥料の混ぜ方を変える（バケツを分ける）。改善しない場合はpHを測定する（目標5.8〜6.2）。換気・空気循環も有効。</span>
-          <span class="en-only">✅ First: switch to separate-bucket mixing. If no improvement, test pH (target 5.8–6.2). Improve air circulation in greenhouse.</span>
-        </div>
-      </div>
-    </div>
+  const sections = shelfDefs.map((s,i) => `
+    <div class="shelf-section${i===0?' active':''}" id="shelf-${s.key}">
+      ${buildShelf(s.key)}
+    </div>`).join('');
 
-    <div class="symptom-item" onclick="toggleSymptom(this)">
-      <div class="symptom-q">
-        <span class="jp-only">茎が極端に短い（根高・ねだか）</span>
-        <span class="en-only">Extremely short edible stems — root heave (<span class="jword" data-jp="根高" data-kana="ねだか" data-meaning="Root heave — roots push up the growing medium, shortening the edible stem portion">根高</span>)</span>
-      </div>
-      <div class="symptom-ans">
-        <span class="jp-only"><strong>品種：</strong>ブロッコリースプラウトで発生。原因は現在調査中。</span>
-        <span class="en-only"><strong>Variety:</strong> Broccoli sprouts. Cause under investigation.</span>
-        <br>
-        <div class="symptom-action">
-          <span class="jp-only">✅ 発生時は発芽密度・温度・水分量・播種量を記録して次回と比較する。</span>
-          <span class="en-only">✅ Log sowing density, temperature, moisture, and seed amount every time this occurs. Compare with non-affected batches.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="symptom-item" onclick="toggleSymptom(this)">
-      <div class="symptom-q">
-        <span class="jp-only">豆苗の根が茶色くなる（根腐れ）</span>
-        <span class="en-only">Pea shoot roots turning brown — root rot (<span class="jword" data-jp="根腐れ" data-kana="ねぐされ" data-meaning="Root rot in pea shoots — the most serious and difficult-to-control quality problem">根腐れ</span>)</span>
-      </div>
-      <div class="symptom-ans">
-        <span class="jp-only">発芽室から出た時点で少しでも根腐れがあれば、ハウスで悪化する。<br><strong>業界での対応候補：</strong>かん水量を増やす・乾燥させない・水を大量に流して菌を洗い流す。</span>
-        <span class="en-only">Any root rot when leaving the germination room will worsen in the greenhouse.<br><strong>Industry-suggested responses:</strong> Increase watering volume. Keep medium moist. Flush with large amounts of water to reduce bacterial load.</span>
-        <br>
-        <div class="symptom-action">
-          <span class="jp-only">✅ 最重要：各ロットの状況を記録する（日付・発芽室の様子・根腐れ率・変更した条件）。記録なしに原因は特定できない。</span>
-          <span class="en-only">✅ Most critical: log every batch (date, germination room conditions, root rot rate, any changes). Without records, root cause cannot be identified.</span>
-        </div>
-      </div>
-    </div>
-
-    <div class="symptom-item" onclick="toggleSymptom(this)">
-      <div class="symptom-q">
-        <span class="jp-only">発芽室で腐敗・悪臭が発生した</span>
-        <span class="en-only">Rot / foul odor in the germination room</span>
-      </div>
-      <div class="symptom-ans">
-        <span class="jp-only"><strong>ブロッコリーの場合：</strong>浸種温度が高すぎた可能性（30℃で実際に発生した）。<br><strong>豆苗の場合：</strong>発芽室での乾燥または種温度上昇が原因の可能性。</span>
-        <span class="en-only"><strong>Broccoli:</strong> Soaking temperature too high (confirmed incident at ~30°C).<br><strong>Pea shoots:</strong> Likely drying out or seed temperature rising from dense packing.</span>
-        <br>
-        <div class="symptom-action">
-          <span class="jp-only">✅ ブロッコリー：浸種温度を20℃以下に下げる。高温浸種は厳禁。</span>
-          <span class="en-only">✅ Broccoli: reduce soaking temperature to 20°C or below. High soaking temperatures are prohibited.</span>
-        </div>
-      </div>
-    </div>
-  </div>
-</div>
-
-<!-- ===== Q&A / CHAT ===== -->
-<div class="section content" id="tab-chat">
-  <div class="card">
-    <div class="card-title">
-      <span class="jp-only">💬 よくある質問</span>
-      <span class="en-only">💬 Frequently Asked Questions</span>
-    </div>
-    <p style="font-size:.78rem;color:#888;margin-bottom:8px">
-      <span class="jp-only">質問をタップしてください</span>
-      <span class="en-only">Tap a question to get an answer</span>
+  document.getElementById('content-tab6').innerHTML = `
+    <p style="font-size:13px;color:var(--text-muted);margin-bottom:16px;line-height:1.7">
+      ${l==='en'
+        ? 'A shared library for professional growth at NOSON — knowledge in cultivation, business, markets, and challenges.'
+        : 'スプラウト農場で働くプロとして知識を深めるための本棚。栽培・経営・市場・挑戦、それぞれに知見を蓄積していく。'}
     </p>
-    <div class="faq-btns" id="faq-btns-jp" style="">
-      <div class="faq-btn jp-only" onclick="showFaq('q1_jp')">今の季節の肥料量は？</div>
-      <div class="faq-btn jp-only" onclick="showFaq('q2_jp')">混ぜ方は？</div>
-      <div class="faq-btn jp-only" onclick="showFaq('q3_jp')">展開タイミングは？</div>
-      <div class="faq-btn jp-only" onclick="showFaq('q4_jp')">浸種温度は？</div>
-      <div class="faq-btn jp-only" onclick="showFaq('q5_jp')">豆苗の根腐れが心配</div>
-      <div class="faq-btn jp-only" onclick="showFaq('q6_jp')">夏の暑さ対策は？</div>
-      <div class="faq-btn en-only" onclick="showFaq('q1_en')">Fertilizer amounts?</div>
-      <div class="faq-btn en-only" onclick="showFaq('q2_en')">How to mix?</div>
-      <div class="faq-btn en-only" onclick="showFaq('q3_en')">When to transfer?</div>
-      <div class="faq-btn en-only" onclick="showFaq('q4_en')">Soaking temperatures?</div>
-      <div class="faq-btn en-only" onclick="showFaq('q5_en')">Root rot in pea shoots?</div>
-      <div class="faq-btn en-only" onclick="showFaq('q6_en')">Summer heat solutions?</div>
-    </div>
-    <div class="chat-window" id="chat-window">
-      <div class="chat-a"><div class="bubble jp-only">こんにちは！気になる質問をタップしてください。さらに詳しく知りたいときは下のボタンからClaudeに質問できます。</div></div>
-      <div class="chat-a"><div class="bubble en-only">Hello! Tap a question above, or use the button below to ask Claude for more detail.</div></div>
-    </div>
-    <button class="claude-btn" onclick="openClaude()">
-      🤖 <span class="jp-only">Claudeにもっと詳しく質問する</span>
-      <span class="en-only">Ask Claude for more detail</span>
-    </button>
-    <div class="copy-done" id="copy-done">
-      <span class="jp-only">✅ 農場情報をコピーしました。Claudeに貼り付けて質問してください。</span>
-      <span class="en-only">✅ Farm context copied. Paste into Claude and ask your question.</span>
-    </div>
-  </div>
-</div>
-
-<script>
-// Language toggle
-function setLang(lang){
-  document.body.className = 'lang-'+lang;
-  document.getElementById('btn-jp').classList.toggle('active', lang==='jp');
-  document.getElementById('btn-en').classList.toggle('active', lang==='en');
-  document.getElementById('chat-window').innerHTML =
-    lang==='jp'
-      ? '<div class="chat-a"><div class="bubble">こんにちは！気になる質問をタップしてください。</div></div>'
-      : '<div class="chat-a"><div class="bubble">Hello! Tap a question above to get an answer.</div></div>';
+    <div class="shelf-nav">${navBtns}</div>
+    ${sections}`;
 }
 
-// Tab switching
-function showTab(name){
-  document.querySelectorAll('.section').forEach(s=>s.classList.remove('active'));
-  document.querySelectorAll('.nav-tab').forEach(t=>t.classList.remove('active'));
-  document.getElementById('tab-'+name).classList.add('active');
-  event.currentTarget.classList.add('active');
+// ── CONTROLS ──────────────────────────────────────────
+const TAB_DEFS = [
+  {id:'tab1', icon:'🌾', jp:'今の農場',       en:'Farm Now'},
+  {id:'tab2', icon:'📅', jp:'年間スケジュール', en:'Schedule'},
+  {id:'tab3', icon:'🧭', jp:'ビジョン・ポリシー', en:'Vision'},
+  {id:'tab4', icon:'🌿', jp:'品種別ケア',     en:'Varieties'},
+  {id:'tab5', icon:'📋', jp:'アクションルール', en:'Rules'},
+  {id:'tab6', icon:'📚', jp:'本棚',           en:'Library'}
+];
+
+function buildNav() {
+  const l = L();
+  document.getElementById('tab-nav-inner').innerHTML = TAB_DEFS.map((t2,i) => `
+    <button class="tab-btn${i===0?' active':''}" onclick="showTab('${t2.id}')" id="nav-${t2.id}">
+      <span>${t2.icon}</span> ${t2[l]}
+    </button>`).join('');
+  document.getElementById('hd-name-jp').textContent = D.meta.farm_jp;
+  document.getElementById('hd-name-en').textContent = D.meta.farm_en;
+  document.getElementById('hd-sub-jp').textContent  = D.meta.sub_jp;
+  document.getElementById('hd-sub-en').textContent  = D.meta.sub_en;
 }
 
-// Variety switching
-function showVariety(name){
-  document.querySelectorAll('.variety-block').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.v-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('v-'+name).classList.add('active');
-  event.currentTarget.classList.add('active');
+function showTab(tabId) {
+  document.querySelectorAll('.tab-section').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('.tab-btn').forEach(b => b.classList.remove('active'));
+  document.getElementById(tabId).classList.add('active');
+  document.getElementById('nav-'+tabId).classList.add('active');
 }
 
-// Season switching
-function showSeason(name){
-  document.querySelectorAll('.recipe-block').forEach(b=>b.classList.remove('active'));
-  document.querySelectorAll('.s-btn').forEach(b=>b.classList.remove('active'));
-  document.getElementById('r-'+name).classList.add('active');
-  event.currentTarget.classList.add('active');
+function showVariety(key) {
+  document.querySelectorAll('[id^="variety-"]').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('[id^="vnav-"]').forEach(b => b.classList.remove('active'));
+  document.getElementById('variety-'+key).classList.add('active');
+  document.getElementById('vnav-'+key).classList.add('active');
 }
 
-// Symptom toggle
-function toggleSymptom(el){ el.classList.toggle('open'); }
-
-// Japanese word tooltips
-const tooltip = document.getElementById('jtooltip');
-document.querySelectorAll('.jword').forEach(el=>{
-  el.addEventListener('click', e=>{
-    e.stopPropagation();
-    const jp = el.dataset.jp;
-    const kana = el.dataset.kana;
-    const meaning = el.dataset.meaning;
-    tooltip.innerHTML = `<strong>${jp}</strong><span class="jtooltip-kana">${kana}</span><span class="jtooltip-meaning">${meaning}</span>`;
-    const rect = el.getBoundingClientRect();
-    let top = rect.bottom + 8;
-    let left = rect.left;
-    if(left + 220 > window.innerWidth) left = window.innerWidth - 228;
-    if(top + 80 > window.innerHeight) top = rect.top - 88;
-    tooltip.style.top = top + 'px';
-    tooltip.style.left = left + 'px';
-    tooltip.classList.add('visible');
-  });
-});
-document.addEventListener('click', ()=>tooltip.classList.remove('visible'));
-
-// FAQ data
-const faqData = {
-  q1_jp:{q:'今の季節（春）の肥料量は？', a:'<strong>春（3〜5月）タンクA：</strong>ホーグス1号 2.25kg ＋ 硝酸石灰 1.5kg、目標EC 1.5。<br>新しい混ぜ方（バケツ2個）で投入後、必ずECメーターで確認してください。他の季節は「肥料・養液」タブで確認できます。'},
-  q2_jp:{q:'肥料の混ぜ方は？', a:'<strong>バケツを2個用意して別々に溶かす。</strong><br>①バケツAにホーグス1号だけ溶かす<br>②バケツBに硝酸石灰だけ溶かす<br>③水槽に水を入れてからAを投入・撹拌<br>④続いてBを投入・撹拌<br><br>絶対に同じバケツに入れないこと。同じバケツで混ぜると白い沈殿が発生してカルシウムが失われます。'},
-  q3_jp:{q:'ハウスへの展開タイミングは？', a:'<strong>かいわれ・ブロッコリー：Day 3 朝7時</strong><br>根っこがトレーの底から少し出ていたらOK。目視確認が基本。<br><br><strong>豆苗：Day 4 朝7時</strong><br><br>発芽室の温度が高かった日は早め、低かった日は遅めに調整する。'},
-  q4_jp:{q:'浸種温度は何度？', a:'<strong>かいわれ大根：目標25℃</strong><br>発芽率を安定させるためにこの温度を保つ。<br><br><strong>ブロッコリースプラウト：20℃以下を厳守</strong><br>30℃で浸種した結果、発芽室で腐敗が発生した実績あり。本来寒さに強い品種なので高温浸種は厳禁。'},
-  q5_jp:{q:'豆苗の根腐れが心配です', a:'根腐れは業界全体の難題。<strong>発芽室から出た時点で少しでも茶色い根があれば、ハウスに入ってから悪化する傾向</strong>があります。<br><br>対応：かん水量を増やして乾燥させない、水を大量に流して菌を洗い流す。<br><br>何より大切なのは<strong>各ロットの状況を記録すること</strong>。記録がないと原因が特定できません。'},
-  q6_jp:{q:'夏の暑さ対策を教えて', a:'<strong>今すぐできること：</strong>15℃の井戸水による散水の回数を増やす（気化冷却）。<br><br><strong>短期：</strong>遮光ネット（寒冷紗）の設置（3,000〜10,000円）で5〜10℃低下。<br><br><strong>根本解決：</strong>ミスト冷却装置の導入（20,000〜50,000円）。夏前に計画する必要あり。'},
-  q1_en:{q:'What are the fertilizer amounts for this season?', a:'<strong>Spring (Mar–May), Tank A:</strong> Hoagus No.1 2.25 kg + Calcium nitrate 1.5 kg. Target EC: 1.5 mS/cm.<br>After adding with the new mixing method, always verify with EC meter. See Fertilizer tab for other seasons.'},
-  q2_en:{q:'How do I mix the fertilizer?', a:'<strong>Use two separate buckets.</strong><br>① Dissolve Hoagus No.1 in Bucket A<br>② Dissolve calcium nitrate in Bucket B<br>③ Fill tank with water, add Bucket A and stir<br>④ Then add Bucket B and stir<br><br>Never combine both in the same bucket. Doing so causes white calcium phosphate precipitate and depletes calcium from the solution.'},
-  q3_en:{q:'When do I transfer to the greenhouse?', a:'<strong>Daikon & broccoli: Day 3, 07:00</strong><br>When roots are just visible through the tray bottom. Always confirm visually.<br><br><strong>Pea shoots: Day 4, 07:00</strong><br><br>If germination room was warmer than usual → transfer slightly earlier. If cooler → transfer slightly later.'},
-  q4_en:{q:'What are the soaking temperatures?', a:'<strong>Daikon: target 25°C</strong><br>Stabilizing at this temperature reduces uneven germination.<br><br><strong>Broccoli: 20°C or below — strictly enforced</strong><br>Soaking at ~30°C caused a confirmed incident of complete batch rot with foul odor. Despite being cold-tolerant, high soaking temperatures are prohibited.'},
-  q5_en:{q:"I'm worried about root rot in pea shoots", a:'Root rot is an industry-wide challenge. <strong>Any root rot visible when leaving the germination room will worsen in the greenhouse.</strong><br><br>Responses: Increase watering volume. Keep medium moist. Flush with large water volume to reduce bacteria.<br><br>Most important: <strong>log every batch</strong> (date, conditions, root rot rate, any changes). Without records, the cause cannot be identified.'},
-  q6_en:{q:'What can I do about summer heat?', a:'<strong>Immediate:</strong> Increase well water irrigation frequency — evaporative cooling using 15°C well water is most cost-effective.<br><br><strong>Short-term:</strong> Install shade netting (est. ¥3,000–10,000). Can lower peak temp by 5–10°C.<br><br><strong>Long-term:</strong> Mist cooling system (est. ¥20,000–50,000). Plan and install before summer.'},
-};
-
-function showFaq(key){
-  const d = faqData[key]; if(!d) return;
-  const win = document.getElementById('chat-window');
-  win.innerHTML += `<div class="chat-q"><div class="bubble">${d.q}</div></div><div class="chat-a"><div class="bubble">${d.a}</div></div>`;
-  setTimeout(()=>win.scrollTop=win.scrollHeight, 50);
+function showShelf(shelfId) {
+  document.querySelectorAll('[id^="shelf-"]').forEach(s => s.classList.remove('active'));
+  document.querySelectorAll('[id^="snav-"]').forEach(b => b.classList.remove('active'));
+  document.getElementById(shelfId).classList.add('active');
+  document.getElementById('snav-'+shelfId.replace('shelf-','')).classList.add('active');
 }
 
-// Claude integration
-const CONTEXT_JP = `【ノーサン スプラウト農場の栽培環境】
-富山県射水市 / 水耕栽培 / 創業約40年
-品種：かいわれ大根・ブロッコリースプラウト・豆苗
-水源：井戸水（約15℃）/ 水槽2トン×タンクA（かいわれ+ブロッコリー）・タンクB（豆苗）
-現在のEC：2.0（見直し中、春目標EC 1.5）
-肥料：ホーグス1号+硝酸石灰（バケツを分けて別々に溶かして投入）
-発芽室温度：20℃ / 予冷：5℃
-経営プライオリティ：①欠品ゼロ ②品質安定 ③コスト削減
-
-このコンテキストをふまえて質問に答えてください：
-`;
-const CONTEXT_EN = `[Nosan Sprout Farm — Growing Environment]
-Location: Imizu, Toyama, Japan / Hydroponic cultivation / ~40 years in operation
-Varieties: Daikon radish sprouts, Broccoli sprouts, Pea shoots
-Water: Well water (~15°C year-round) / 2-ton tanks: Tank A (daikon+broccoli), Tank B (pea shoots)
-Current EC: 2.0 mS/cm (under review — spring target: 1.5)
-Fertilizer: Hoagus No.1 + Calcium nitrate (mixed separately in two buckets, then added to tank)
-Germination room: 20°C fixed / Pre-cooling: 5°C
-Farm priorities: ①Zero stockouts ②Consistent quality ③Cost reduction
-
-Please answer my question with this context in mind:
-`;
-
-function openClaude(){
-  const isEn = document.body.classList.contains('lang-en');
-  navigator.clipboard.writeText(isEn ? CONTEXT_EN : CONTEXT_JP).then(()=>{
-    document.getElementById('copy-done').style.display='block';
-    setTimeout(()=>document.getElementById('copy-done').style.display='none', 4000);
-  }).catch(()=>{});
-  window.open('https://claude.ai','_blank');
+function setLang(lang) {
+  document.body.setAttribute('lang', lang);
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.remove('active'));
+  event.target.classList.add('active');
+  renderAll();
+  buildNav();
 }
+
+function renderAll() {
+  renderTab1(); renderTab2(); renderTab3();
+  renderTab4(); renderTab5(); renderTab6();
+}
+
+// ── INIT ──────────────────────────────────────────────
+buildNav();
+renderAll();
 </script>
 </body>
 </html>
